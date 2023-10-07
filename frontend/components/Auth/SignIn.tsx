@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { signInUser } from '../../firebase/auth';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import colors from '../../constants/colors';
 
 type SignInProps = {
   setHasAccount: React.Dispatch<React.SetStateAction<boolean>>;
@@ -13,7 +15,8 @@ const SignIn = (props: SignInProps) => {
   const [error, setError] = useState("");
 
   return (
-    <View>
+    <SafeAreaView style={styles.parentContainer}>
+      <Text style={styles.signInText}>Welcome!</Text>
       <TextInput
         style={styles.TextInput}
         placeholder="Email"
@@ -44,7 +47,7 @@ const SignIn = (props: SignInProps) => {
         </Text>
       </View>
       <Text style={styles.ErrorText}>{error}</Text>
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -53,8 +56,21 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     margin: 5,
   },
+  parentContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width : '100%',
+    backgroundColor: colors.background,
+  },
+  signInText: {
+    fontSize: 27,
+    fontWeight: 'bold',
+    color: 'black',
+    marginBottom: 10,
+  },
   changeText: {
-    color: 'blue',
+    color: colors.pink,
   },
   TextInput: {
     width: 250,
@@ -69,7 +85,7 @@ const styles = StyleSheet.create({
     margin: 5,
     padding: 10,
     alignItems: 'center',
-    backgroundColor: 'blue',
+    backgroundColor: colors.magenta,
     borderRadius: 10,
   },
   ButtonText: {
