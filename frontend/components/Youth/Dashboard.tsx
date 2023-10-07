@@ -13,6 +13,7 @@ type Props = BottomTabScreenProps<tabParamsList, 'Dashboard'>;
 
 const Dashboard = ({ route, navigation }: Props) => {
     const [events, setEvents] = useState<string[]>([]);
+    const[ refreshing, setRefreshing] = useState<boolean>(false);
     const user = route.params.user;
 
     useEffect(() => {
@@ -34,6 +35,14 @@ const Dashboard = ({ route, navigation }: Props) => {
 
     }
     
+    const onRefresh = React.useCallback(() => {
+        setRefreshing(true);
+        fetchEventsData();
+        setTimeout(() => {
+          setRefreshing(false);
+        }, 2000);
+      }, []);    
+    
     const handleError = (error: FirebaseError) => {
         const errorCode: string = error.code;
         const errorMessage = error.message;
@@ -46,6 +55,8 @@ const Dashboard = ({ route, navigation }: Props) => {
 
           <FlatList
               data={events}
+              refreshing={refreshing}
+              onRefresh={onRefresh} 
               renderItem={({ item }) => <Text style={styles.item}>{item}</Text>}
               keyExtractor={(item, index) => index.toString()}
           />
