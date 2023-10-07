@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { signUpUser } from '../../firebase/auth';
+import DropDownPicker from 'react-native-dropdown-picker';
 
 type SignUpProps = {
   setHasAccount: React.Dispatch<React.SetStateAction<boolean>>;
@@ -13,20 +14,30 @@ const SignUp = (props: SignUpProps) => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
-  const [userType, setUserType] = useState("");
+  const [userOpen, setuserOpen] = useState(false);
+  const [userValue, setuserValue] = useState("");
+  const [user, setUser] = useState([
+    { label: "Girl", value: "Girl" },
+    { label: "Leader", value: "Leader" },
+    { label: "Admin", value: "Admin" },
+  ]);
 
   const handleSignUp = () => {
     if (name === "") {
       setError("name cannot be empty");
     } else if (password !== confirmPassword) {
       setError("passwords do not match");
-    } else {
-      signUpUser(name, email, password, setError);
+    } else if(userValue === "") {
+      //error check that user type is not empty
+      setError("Please select user type")
+    }
+    else {
+      signUpUser(name, email, password, userValue, setError);
     }
   }
 
   return (
-    <View>
+    <View style={styles.container}>
       <TextInput
         style={styles.TextInput}
         value={name}
@@ -55,6 +66,20 @@ const SignUp = (props: SignUpProps) => {
         secureTextEntry={true}
         onChangeText={(text) => setConfirmPassword(text)}
       />
+      {/* dropdown picker to select user type */}
+      <View style={styles.container}>
+        <DropDownPicker
+              open={userOpen}
+              value={userValue} //userValue
+              items={user}
+              style={styles.dropdown}
+              setOpen={setuserOpen}
+              setValue={setuserValue}
+              setItems={setUser}
+              placeholder="Select User Type"
+              activityIndicatorColor="#5188E3"
+            />
+      </View>
       <TouchableOpacity
         style={styles.Button}
         onPress={handleSignUp}>
@@ -71,9 +96,6 @@ const SignUp = (props: SignUpProps) => {
             Sign In
         </Text>
       </View>
-      <View style={styles.container}>
-        
-      </View>
       <Text style={styles.ErrorText}>{error}</Text>
     </View>
   );
@@ -81,7 +103,6 @@ const SignUp = (props: SignUpProps) => {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
     margin: 5,
   },
   changeText: {
@@ -98,6 +119,7 @@ const styles = StyleSheet.create({
   Button: {
     width: 250,
     margin: 5,
+    marginTop: 150,
     padding: 10,
     alignItems: 'center',
     backgroundColor: 'blue',
@@ -109,7 +131,15 @@ const styles = StyleSheet.create({
   ErrorText: {
     textAlign: 'center',
     color: 'red',
-  }
+  },
+  dropdown: {
+    width: 250,
+    height: 40,
+    margin: 5,
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: 'lightgray',
+  },
 });
 
 export default SignUp;
