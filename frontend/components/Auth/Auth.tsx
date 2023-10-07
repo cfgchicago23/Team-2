@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import SignUp from './SignUp';
 import SignIn from './SignIn';
 
-const Auth = () => {  
+export const Auth = () => {  
 
   const [hasAccount, setHasAccount] = useState(false);
 
@@ -12,5 +12,3 @@ const Auth = () => {
     return (<SignIn setHasAccount={setHasAccount}/>);
   }
 };
-
-export default Auth;
