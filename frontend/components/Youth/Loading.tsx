@@ -53,13 +53,6 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
       backgroundColor: colors.background,
   },
-  logo: {
-      width: 400,
-      height: 180,
-      justifyContent: 'center',
-      marginLeft: 70,
-      marginTop: 30,
-  },
   loadingText: {
       fontSize: 30,
       fontWeight: 'semibold',
@@ -72,6 +65,13 @@ const styles = StyleSheet.create({
       marginTop: 0, // Adjust the margin here to reduce the gap
       paddingLeft: 20,
       paddingRight: 20,
-  },
+    },
+    logo: {
+        width: 400,
+        height: 180,
+        justifyContent: 'center',
+        marginLeft: 70,
+        marginTop: 30,
+    },
 });
 export default Loading;
