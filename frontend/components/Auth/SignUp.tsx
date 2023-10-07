@@ -13,6 +13,7 @@ const SignUp = (props: SignUpProps) => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
+  const [userType, setUserType] = useState("");
 
   const handleSignUp = () => {
     if (name === "") {
@@ -69,6 +70,9 @@ const SignUp = (props: SignUpProps) => {
             onPress={(event) => {props.setHasAccount(true);}}>
             Sign In
         </Text>
+      </View>
+      <View style={styles.container}>
+        
       </View>
       <Text style={styles.ErrorText}>{error}</Text>
     </View>
