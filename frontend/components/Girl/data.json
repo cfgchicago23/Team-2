@@ -10,5 +10,29 @@
       "topic": "Being a Good Friend",
       "title": "3 steps",
       "description": "Story, Good Friends and Bad Friends, Journal"
+    },
+    {
+      "number": 3,
+      "topic": "Making Healthy Choices",
+      "title": "5 steps",
+      "description": "Story, Maintaining a Balanced Diet, Tips for Planning Meals, Grow Your Own Garden, Journal"
+    },
+    {
+      "number": 4,
+      "topic": "What Makes You Happy?",
+      "title": "3 steps",
+      "description": "Story, Reflection Questions, Journal"
+    },
+    {
+      "number": 5,
+      "topic": "Self-Image",
+      "title": "4 steps",
+      "description": "Story, Reflection Questions, Dove Evolution Campaign, Journal"
+    },
+    {
+      "number": 6,
+      "topic": "Choosing Good Friends",
+      "title": "4 steps",
+      "description": "Story, Reflection Questions, Friendship Letters, Journal"
     }
   ]
