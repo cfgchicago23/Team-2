@@ -7,7 +7,7 @@ const Help = () => {
 
  return (
     <SafeAreaView style={styles.container}>
-        <Text>Help</Text>
+        <Text>Add Girls Through Search by email</Text>
     </SafeAreaView>
  )
 };
