@@ -19,6 +19,7 @@ export const signUpUser = (name: string, email: string, password: string, type:s
                 email: email,
                 type: type,
                 club: null,
+                mood: 3
               }).catch((error: FirebaseError) => authError(error, setError));
         })
         .catch((error: FirebaseError) => authError(error, setError));
