@@ -7,7 +7,7 @@ export async function findUserByEmail(email: string) {
     const usersRef = collection(db, "users");
 
     // Create a query against the collection.
-    const q = query(usersRef, where("email", "==", email), where("type", "==", "Leader"));
+    const q = query(usersRef, where("email", "==", email), where("type", "==", "Leader"), where("club", "==", null));
 
     const snapshot = await getDocs(q);
     if (snapshot.empty){
@@ -37,4 +37,6 @@ export function createNewClubFirestore(uid: string, clubName: string){
     updateDoc(doc(db, "users", uid), {
         club: uid,
     }).catch((error) => console.log(error));
+
+    return {}
 }

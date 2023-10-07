@@ -14,12 +14,11 @@ const ManageLeaders = () => {
   const [error, setError] = useState("")
 
   const createNewClub = () => {
-    createNewClubFirestore(createClub.uid, createClub.clubName).then(() => {
-      setNewLeader("")
-      setCreateClub({
-        uid: "",
-        clubName: "",
-      })
+    createNewClubFirestore(createClub.uid, createClub.clubName)
+    setNewLeader("")
+    setCreateClub({
+      uid: "",
+      clubName: "",
     })
   }
 
