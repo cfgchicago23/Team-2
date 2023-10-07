@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, Modal, Button, ScrollView, StyleSheet } f
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import lessonData from './data.json';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import colors from '../../constants/colors';
 
 const Lessons = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -21,9 +22,10 @@ const Lessons = () => {
       <TouchableOpacity onPress={handleModuleClick}>
         <View style={styles.moduleContainer}>
           <View style={styles.rectangle}>
+            <FontAwesome name="star" size={24} color="black" />
             <Text style={styles.moduleNumber}>Lesson {number}</Text>
             <Text style={styles.moduleTopic}>{topic}</Text>
-            <FontAwesome name="star" size={24} color="black" />
+            
           </View>
         </View>
       </TouchableOpacity>
@@ -60,7 +62,11 @@ const Lessons = () => {
             <View style={styles.modalContainer}>
               <Text style={styles.modalTitle}>Lesson {selectedLesson.number}</Text>
               <Text style={styles.modalTopic}>{selectedLesson.topic}</Text>
-              <Text style={styles.modalDescription}>{selectedLesson.description}</Text>
+              {selectedLesson.description.split(', ').map((line, index) => (
+                <Text key={index} style={styles.modalDescription}>
+                  - {line}
+                </Text>
+              ))}
               {/* Add any other information you want to display */}
               <Button title="Close" onPress={() => setModalVisible(false)} />
             </View>
@@ -74,7 +80,7 @@ const Lessons = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F4ECFF',
+    backgroundColor: colors.background,
   },
   title: {
     fontSize: 20,
@@ -88,10 +94,10 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   rectangle: {
-    width: 200,
+    width: 350,
     height: 100,
-    borderRadius: 10,
-    backgroundColor: '#DF91C0',
+    borderRadius: 20,
+    backgroundColor: colors.pink,
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: 20,
@@ -109,7 +115,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'white',
+    backgroundColor: colors.background,
     padding: 20,
   },
   modalTitle: {
@@ -119,11 +125,15 @@ const styles = StyleSheet.create({
   },
   modalTopic: {
     fontSize: 18,
-    marginBottom: 10,
+    fontWeight: 'bold',
+    marginBottom: 60,
   },
   modalDescription: {
     fontSize: 16,
-    marginBottom: 20,
+    marginBottom: 30,
+    width: '100%', // Add a fixed width to the Text elements
+    justifyContent: 'flex-start', // Align text to the start (left)
+    paddingLeft: 70,
   },
 });
 
