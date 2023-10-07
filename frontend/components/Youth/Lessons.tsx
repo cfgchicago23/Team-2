@@ -70,7 +70,7 @@ const Lessons = () => {
               ))}
               <WebView
                 source={{ uri: 'https://www.youtube.com/embed/sF3iRZtkyAQ?si=Z67-c5AzLc1xNsp-' }}
-                style={{ width: 320, height: 180 }}
+                style={{ width: 320, height: 90 }}
               />
               {/* Add any other information you want to display */}
               <Button title="Close" onPress={() => setModalVisible(false)} />
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 20,
+    padding: 40,
     backgroundColor: colors.background,
   },
   modalTitle: {
