@@ -1,18 +1,56 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { View, Text, TextInput, Button, FlatList, TouchableOpacity } from 'react-native';
 import { StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import colors from '../../constants/colors';
-const LeaderDashboard = () => {
+import { db } from '../../firebase/firebaseConfig';
+import { DocumentData, doc, getDoc, updateDoc } from 'firebase/firestore';
+import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
+import { tabParamsList } from './LeaderNav';
+import { FirebaseError } from 'firebase/app';
+
+type Props = BottomTabScreenProps<tabParamsList, 'Dashboard'>;
+
+const LeaderDashboard = ({ route, navigation }: Props) => {
     const [events, setEvents] = useState<string[]>([]);
     const [eventName, setEventName] = useState<string>('');
+    const user = route.params.user;
 
+    useEffect(() => {
+        fetchEventsData();
+    });
+
+    const fetchEventsData = () => {
+        const clubRef = doc(db, 'clubs', user.uid);
+        getDoc(clubRef).then((clubData: DocumentData) => {
+            setEvents(clubData.data().dashboard);
+        }).catch((error: FirebaseError) => {
+            handleError(error);
+        });
+    }
+    
+    const handleError = (error: FirebaseError) => {
+        const errorCode: string = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+    }
 
     const addEvent = () => {
-      if (eventName.trim()) {
-        setEvents([...events, eventName.trim()]);
-        setEventName('');
-      }
+        if (eventName.trim()) {
+            const clubRef = doc(db, 'clubs', user.uid);
+            getDoc(clubRef).then((clubData: DocumentData) => {
+                const newEvents = [eventName.trim(), ...clubData.data().dashboard];
+                updateDoc(clubRef, {
+                    dashboard: newEvents
+                }).then(() => {
+                    fetchEventsData();
+                })
+            }).catch((error: FirebaseError) => {
+                handleError(error);
+            });
+            setEvents([...events, eventName.trim()]);
+            setEventName('');
+        }
     };
 
   return (
