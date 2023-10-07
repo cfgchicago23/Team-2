@@ -1,14 +1,14 @@
 [
     {
       "number": 1,
-      "topic": "Introduction to React",
-      "title": "Getting Started with React",
-      "description": "Learn the basics of React and how to set up your development environment."
+      "topic": "Being Unique",
+      "title": "3 steps",
+      "description": "Story, All About Me Autobiography, Journal"
     },
     {
       "number": 2,
-      "topic": "React Components",
-      "title": "Understanding React Components",
-      "description": "Explore the concept of React components and their lifecycle."
+      "topic": "Being a Good Friend",
+      "title": "3 steps",
+      "description": "Story, Good Friends and Bad Friends, Journal"
     }
   ]
