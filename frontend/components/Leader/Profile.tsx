@@ -1,4 +1,3 @@
-import { StatusBar } from "expo-status-bar";
 import { View, Text, TouchableOpacity, StyleSheet, TextInput, Image } from "react-native";
 import { signOutUser } from "../../firebase/auth";
 import { useState } from "react";
@@ -23,22 +22,13 @@ export default function Profile({ route, navigation }: Props) {
 
       {/* Display User's Email Address */}
       <Text style={styles.email}>{user.email}</Text>
-
+      
       <View style={styles.bottom}>
         <TouchableOpacity onPress={() => signOutUser(setError)} style={styles.signoutButton}>
           <Text style={styles.signout}>Sign Out</Text>
         </TouchableOpacity>
         <Text>{error}</Text>
       </View>
-
-      <View style={styles.bottom}>
-        <TouchableOpacity onPress={() => signOutUser(setError)} style={styles.signoutButton}>
-          <Text style={styles.signout}>Sign Out</Text>
-        </TouchableOpacity>
-        <Text>{error}</Text>
-      </View>
-
-      <StatusBar style="auto" />
     </View>
   );
 }
