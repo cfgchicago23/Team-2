@@ -9,6 +9,7 @@ import lessonData from '../../data.json';
 export default function TabTwoScreen() {
   // Define the Module component to display a rectangle with a number, icon, and topic
   const Module = ({ number, topic }) => (
+    //add on click navigation
     <View style={styles.moduleContainer}>
       <View style={styles.rectangle}>
       <Text style={styles.moduleNumber}>Lesson {number}</Text>
