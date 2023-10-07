@@ -4,7 +4,7 @@ import { StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import colors from '../../constants/colors';
 
-const Dashboard = ({ studentName }) => {
+const Dashboard = ({ studentName }: { studentName: string}) => {
   // Define any state variables you may need using the useState hook
   const [upcomingMeetings, setUpcomingMeetings] = useState([]);
   const [notifications, setNotifications] = useState([]);
