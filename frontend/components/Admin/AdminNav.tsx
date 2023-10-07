@@ -12,13 +12,13 @@ export type tabParamsList = {
   "Manage Leaders": {user: User},
 }
 
-export type GirlNavProps = {
+export type YouthNavProps = {
   user: User
 }
 
 const Tab = createBottomTabNavigator<tabParamsList>();
 
-export const AdminNav = (props: GirlNavProps) => (
+export const AdminNav = (props: YouthNavProps) => (
   <NavigationContainer>
     <Tab.Navigator>
       <Tab.Screen

@@ -17,7 +17,7 @@ export type tabParamsList = {
   Profile: { user: User }
 }
 
-export type GirlNavProps = {
+export type YouthNavProps = {
   user: User,
   userData: any,
   fetchUserData: any,
@@ -26,7 +26,7 @@ export type GirlNavProps = {
 
 const Tab = createBottomTabNavigator<tabParamsList>();
 
-export const GirlNav = (props: GirlNavProps) => {
+export const YouthNav = (props: YouthNavProps) => {
   const { user, userData, fetchUserData, setUserData } = props;
   console.log(userData.club)
   if (userData.club === null) {
