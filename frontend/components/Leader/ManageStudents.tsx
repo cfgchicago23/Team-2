@@ -11,15 +11,15 @@ import { User } from 'firebase/auth';
 
 type Props = BottomTabScreenProps<tabParamsList, 'ManageClub'>;
 
-const ManageStudents = ({ route, navigation }: Props) => {  
+const ManageYouth = ({ route, navigation }: Props) => {  
 
   const [email, setEmail] = useState<string>();
   const user: User = route.params.user;
   const [error, setError] = useState("");
 
-  const handleAddGirl = () => {
+  const handleAddYouth = () => {
     if (email !== undefined) {
-      const q = query(collection(db, "users"), where("email", "==", email), where("type", "==", "Girl"));
+      const q = query(collection(db, "users"), where("email", "==", email), where("type", "==", "Youth"));
       getDocs(q).then((userList: QuerySnapshot) => {
         userList.forEach((document: DocumentData) => {
           if (document.data().club === null) {
@@ -39,7 +39,7 @@ const ManageStudents = ({ route, navigation }: Props) => {
 
   return (
     <SafeAreaView style={styles.container}>
-        <Text>Manage Students</Text>
+        <Text>Manage Youth</Text>
         <TextInput
           style={styles.TextInput}
           placeholder="Email"
@@ -49,10 +49,10 @@ const ManageStudents = ({ route, navigation }: Props) => {
         />
         <TouchableOpacity
           style={styles.Button}
-          onPress={() => handleAddGirl()}>
+          onPress={() => handleAddYouth()}>
             <Text
               style={styles.ButtonText}>
-              Add Girl
+              Add Youth
             </Text>
         </TouchableOpacity>
         <Text style={styles.ErrorText}>{error}</Text>
@@ -92,4 +92,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default ManageStudents;
+export default ManageYouth;
