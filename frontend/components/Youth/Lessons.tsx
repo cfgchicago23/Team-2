@@ -4,6 +4,7 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 import lessonData from './data.json';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import colors from '../../constants/colors';
+import { WebView } from 'react-native-webview';
 
 const Lessons = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -67,6 +68,10 @@ const Lessons = () => {
                   - {line}
                 </Text>
               ))}
+              <WebView
+                source={{ uri: 'https://www.youtube.com/embed/sF3iRZtkyAQ?si=Z67-c5AzLc1xNsp-' }}
+                style={{ width: 320, height: 180 }}
+              />
               {/* Add any other information you want to display */}
               <Button title="Close" onPress={() => setModalVisible(false)} />
             </View>
