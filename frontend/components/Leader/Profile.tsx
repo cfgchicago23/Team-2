@@ -1,4 +1,3 @@
-import { StatusBar } from "expo-status-bar";
 import { View, Text, TouchableOpacity, StyleSheet, TextInput, Image } from "react-native";
 import { signOutUser } from "../../firebase/auth";
 import { useState } from "react";
@@ -37,8 +36,6 @@ export default function Profile({ route, navigation }: Props) {
         </TouchableOpacity>
         <Text>{error}</Text>
       </View>
-
-      <StatusBar style="auto" />
     </View>
   );
 }
