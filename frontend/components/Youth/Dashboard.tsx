@@ -7,7 +7,7 @@ import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { FirebaseError } from 'firebase/app';
 import { doc, getDoc, DocumentData } from 'firebase/firestore';
 import { db } from '../../firebase/firebaseConfig';
-import { tabParamsList } from './GirlNav';
+import { tabParamsList } from './YouthNav';
 
 type Props = BottomTabScreenProps<tabParamsList, 'Dashboard'>;
 

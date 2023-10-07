@@ -4,6 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { StyleSheet } from 'react-native';
 import colors from '../../constants/colors';
 import { createNewClubFirestore, findUserByEmail } from './firestoreQueries';
+import { signOutUser } from '../../firebase/auth';
 const ManageLeaders = () => {  
   
   const [newLeader, setNewLeader] = useState("");
@@ -75,6 +76,12 @@ const ManageLeaders = () => {
           </TouchableOpacity>
           </View>
         )}
+        <View style={styles.bottom}>
+          <TouchableOpacity onPress={() => signOutUser(setError)}>
+            <Text style={styles.signout}>Sign Out</Text>
+          </TouchableOpacity>
+          <Text>{error}</Text>
+        </View>
     </SafeAreaView>
  )
 };
@@ -111,6 +118,14 @@ const styles = StyleSheet.create({
   ErrorText: {
     textAlign: 'center',
     color: 'red',
+  },
+  signout: {
+    color: 'red',
+  },
+  bottom: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
   }
 });
 

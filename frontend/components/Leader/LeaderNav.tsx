@@ -2,7 +2,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { User } from "firebase/auth";
-import Profile from '../Girl/Profile';
+import Profile from '../Youth/Profile';
 import React from 'react';
 
 import Dashboard from './Dashboard';
@@ -14,6 +14,7 @@ export type tabParamsList = {
   Dashboard: {user: User}
   Forums: {user: User},
   ManageClub: {user: User},
+  Profile: {user: User}
 }
 
 export type LeaderNavProps = {
@@ -74,6 +75,19 @@ export const LeaderNav = (props: LeaderNavProps) => {
               tabBarHideOnKeyboard: true,
             }}
             initialParams={{user: props.user}}
+          />
+          <Tab.Screen
+            name="Profile"
+            component={Profile}
+            options={{
+              headerShown: false,
+              tabBarShowLabel: false,
+              tabBarIcon: ({ color, size }) => (
+                <MaterialCommunityIcons name="account" color={color} size={size} />
+              ),
+              tabBarHideOnKeyboard: true,
+            }}
+            initialParams={{ user: props.user }}
           />
         </Tab.Navigator>
       </NavigationContainer>
