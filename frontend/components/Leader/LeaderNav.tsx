@@ -14,6 +14,7 @@ export type tabParamsList = {
   Dashboard: {user: User}
   Forums: {user: User},
   ManageClub: {user: User},
+  Profile: {user: User}
 }
 
 export type LeaderNavProps = {
@@ -65,6 +66,19 @@ export const LeaderNav = (props: LeaderNavProps) => {
           <Tab.Screen
             name="Forums"
             component={Forums}
+            options={{
+              headerShown: false,
+              tabBarShowLabel: false,
+              tabBarIcon: ({ color, size }) => (
+                <MaterialCommunityIcons name="account" color={color} size={size} />
+              ),
+              tabBarHideOnKeyboard: true,
+            }}
+            initialParams={{user: props.user}}
+          />
+          <Tab.Screen
+            name="Profile"
+            component={Profile}
             options={{
               headerShown: false,
               tabBarShowLabel: false,
