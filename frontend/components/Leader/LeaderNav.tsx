@@ -8,6 +8,7 @@ import React from 'react';
 import Dashboard from './Dashboard';
 import Forums from './Forums';
 import ManageStudents from './ManageStudents';
+import Loading from './Loading';
 
 export type tabParamsList = {
   Dashboard: {user: User}
@@ -16,11 +17,15 @@ export type tabParamsList = {
 }
 
 export type LeaderNavProps = {
-  user: User
+  user: User,
+  userData: any,
+  fetchUserData: any,
+  setUserData: any,
 }
 
 const Tab = createBottomTabNavigator<tabParamsList>();
 
+<<<<<<< HEAD
 export const LeaderNav = (props: LeaderNavProps) => (
   <NavigationContainer>
     <Tab.Navigator>
@@ -78,3 +83,60 @@ export const LeaderNav = (props: LeaderNavProps) => (
     </Tab.Navigator>
   </NavigationContainer>
 );
+=======
+export const LeaderNav = (props: LeaderNavProps) => {
+  const {user, userData, fetchUserData, setUserData} = props;
+  console.log(userData.club)
+  if (userData.club === null){
+    return(
+      <Loading user={user} userData={userData} fetchUserData={fetchUserData} setUserData={setUserData}></Loading>
+    )
+  }else{
+    return (
+      <NavigationContainer>
+        <Tab.Navigator>
+          <Tab.Screen
+            name="Dashboard"
+            component={Dashboard}
+            options={{
+              headerShown: false,
+              tabBarShowLabel: false,
+              tabBarIcon: ({ color, size }) => (
+                <MaterialCommunityIcons name="home" color={color} size={size} />
+              ),
+              tabBarHideOnKeyboard: true,
+             }}
+            initialParams={{user: props.user}}
+          />
+          <Tab.Screen
+            name="ManageClub"
+            component={ManageStudents}
+            options={{
+              headerShown: false,
+              tabBarShowLabel: false,
+              tabBarIcon: ({ color, size }) => (
+                <MaterialCommunityIcons name="account" color={color} size={size} />
+              ),
+              tabBarHideOnKeyboard: true,
+            }}
+            initialParams={{user: props.user}}
+          />
+          <Tab.Screen
+            name="Forums"
+            component={Forums}
+            options={{
+              headerShown: false,
+              tabBarShowLabel: false,
+              tabBarIcon: ({ color, size }) => (
+                <MaterialCommunityIcons name="account" color={color} size={size} />
+              ),
+              tabBarHideOnKeyboard: true,
+            }}
+            initialParams={{user: props.user}}
+          />
+        </Tab.Navigator>
+      </NavigationContainer>
+    );
+  }
+};
+>>>>>>> main
