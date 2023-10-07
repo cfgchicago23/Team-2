@@ -1,90 +1,109 @@
-import React, { useState } from 'react';
-import { View, Text } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Text, FlatList } from 'react-native';
 import { StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import colors from '../../constants/colors';
+import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
+import { FirebaseError } from 'firebase/app';
+import { doc, getDoc, DocumentData } from 'firebase/firestore';
+import { db } from '../../firebase/firebaseConfig';
+import { tabParamsList } from './GirlNav';
 
-const Dashboard = ({ studentName }) => {
-  // Define any state variables you may need using the useState hook
-  const [upcomingMeetings, setUpcomingMeetings] = useState([]);
-  const [notifications, setNotifications] = useState([]);
-  const [alerts, setAlerts] = useState([]);
+type Props = BottomTabScreenProps<tabParamsList, 'Dashboard'>;
+
+const Dashboard = ({ route, navigation }: Props) => {
+    const [events, setEvents] = useState<string[]>([]);
+    const user = route.params.user;
+
+    useEffect(() => {
+        fetchEventsData();
+    });
+
+    const fetchEventsData = () => {
+        const userRef = doc(db, 'users', user.uid);
+        getDoc(userRef).then((userData: DocumentData) => {
+            const clubRef = doc(db, 'clubs', userData.data().club);
+            getDoc(clubRef).then((clubData: DocumentData) => {
+                setEvents(clubData.data().dashboard);
+            }).catch((error: FirebaseError) => {
+                handleError(error);
+            });
+        }).catch((error: FirebaseError) => {
+            handleError(error);
+        });
+
+    }
+    
+    const handleError = (error: FirebaseError) => {
+        const errorCode: string = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+    }
 
   return (
-    <SafeAreaView style={styles.container}>
-      {/* Title */}
-      <Text style={styles.title}>Thrive for Girls</Text>
+      <SafeAreaView style={styles.container}>
+          <Text style={styles.title}>Announcements</Text>
 
-      {/* Greeting with the student's name */}
-      <Text style={styles.greeting}>Hello {studentName}!</Text>
-
-      {/* Render the pink boxes for upcoming meetings, notifications, and alerts */}
-      <View style={styles.box}>
-        <Text style={styles.boxText}>Upcoming Meetings</Text>
-        <Text style={styles.subText}>Friday, October 6 @ 5 pm</Text>
-        <Text style={styles.subText}>JP Morgan Chase, Chicago USA</Text>
-        {/* You can add content specific to upcoming meetings here */}
-      </View>
-
-      <View style={styles.box}>
-        <Text style={styles.boxText}>Notifications</Text>
-        <Text style={styles.subText}>Lorem impsum</Text>
-        {/* You can add content specific to notifications here */}
-      </View>
-
-      <View style={styles.box}>
-        <Text style={styles.boxText}>Alerts in Your Area</Text>
-        <Text style={styles.subText}>Lorem impsum</Text>
-        {/* You can add content specific to alerts here */}
-      </View>
-    </SafeAreaView>
+          <FlatList
+              data={events}
+              renderItem={({ item }) => <Text style={styles.item}>{item}</Text>}
+              keyExtractor={(item, index) => index.toString()}
+          />
+      </SafeAreaView>
   );
 };
 
+
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: colors.background,
+      flex: 1,
+      backgroundColor: colors.background,
+      paddingHorizontal: 20,
+      paddingTop: 50,
   },
   title: {
-    fontSize: 27,
-    fontWeight: 'bold',
-    color: 'black',
+      fontSize: 28,
+      fontWeight: 'bold',
+      marginBottom: 20,
+  },
+  inputContainer: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      marginBottom: 20,
+  },
+  input: {
+      flex: 1,
+      height: 50,
+      borderColor: '#e0e0e0',
+      borderWidth: 1,
+      borderRadius: 10,
+      paddingHorizontal: 15,
+      backgroundColor: '#ffffff',
+  },
+  addButton: {
+      marginLeft: 10,
+      backgroundColor: colors.light_pink,
+      borderRadius: 10,
+      paddingVertical: 15,
+      paddingHorizontal: 20,
+      alignItems: 'center',
+      justifyContent: 'center',
+  },
+  addButtonText: {
+      color: '#ffffff',
+      fontWeight: 'bold',
+  },
+  item: {
+    padding: 15,
+    backgroundColor: '#ffffff',
+    borderRadius: 30,
     marginBottom: 10,
-  },
-  greeting: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: 'black',
-    marginBottom: 20,
-    marginLeft: -200,
-  },
-  box: {
-    width: 350,
-    height: 150,
-    borderRadius: 20,
-    backgroundColor: colors.pink,
-    margin: 10,
-    justifyContent: 'center',
-    alignItems: 'left',
-  },
-  subText: {
     fontSize: 16,
-    color: 'black',
-    marginTop: 0,
-    marginLeft: 10,
-  },
-  boxText: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: 'black',
-    textAlign: 'left', // Align text to the left
-    position: 'absolute',
-    left: 20,
-    top: 20,
-  },
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.2,
+    shadowRadius: 2,
+},
 });
 
 export default Dashboard;

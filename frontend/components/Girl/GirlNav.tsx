@@ -7,6 +7,8 @@ import Dashboard from './Dashboard';
 import Lessons from './Lessons';
 import Help from './Help';
 import Profile from './Profile';
+import Loading from './Loading';
+import { fetchUserData } from '../../firebase/firestore';
 
 export type tabParamsList = {
   Dashboard: {user: User}
@@ -16,7 +18,10 @@ export type tabParamsList = {
 }
 
 export type GirlNavProps = {
-  user: User
+  user: User,
+  userData: any,
+  fetchUserData: any,
+  setUserData: any,
 }
 
 const Tab = createBottomTabNavigator<tabParamsList>();
@@ -35,6 +40,7 @@ export const GirlNav = (props: GirlNavProps) => (
           ),
           tabBarHideOnKeyboard: true,
          }}
+        initialParams={{user: props.user}}
       />
       <Tab.Screen
         name="Lessons"
@@ -43,7 +49,7 @@ export const GirlNav = (props: GirlNavProps) => (
           headerShown: false,
           tabBarShowLabel: false,
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="account" color={color} size={size} />
+            <MaterialCommunityIcons name="book" color={color} size={size} />
           ),
           tabBarHideOnKeyboard: true,
         }}
@@ -56,7 +62,7 @@ export const GirlNav = (props: GirlNavProps) => (
           headerShown: false,
           tabBarShowLabel: false,
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="account" color={color} size={size} />
+            <MaterialCommunityIcons name="phone" color={color} size={size} />
           ),
           tabBarHideOnKeyboard: true,
         }}
