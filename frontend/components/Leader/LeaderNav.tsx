@@ -57,7 +57,7 @@ export const LeaderNav = (props: LeaderNavProps) => {
               headerShown: false,
               tabBarShowLabel: false,
               tabBarIcon: ({ color, size }) => (
-                <MaterialCommunityIcons name="account" color={color} size={size} />
+                <MaterialCommunityIcons name="laptop" color={color} size={size} />
               ),
               tabBarHideOnKeyboard: true,
             }}
@@ -70,7 +70,7 @@ export const LeaderNav = (props: LeaderNavProps) => {
               headerShown: false,
               tabBarShowLabel: false,
               tabBarIcon: ({ color, size }) => (
-                <MaterialCommunityIcons name="account" color={color} size={size} />
+                <MaterialCommunityIcons name="mail" color={color} size={size} />
               ),
               tabBarHideOnKeyboard: true,
             }}
