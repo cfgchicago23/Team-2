@@ -1,8 +1,6 @@
-import { DocumentData } from 'firebase/firestore';
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, TextInput, StyleSheet, ScrollView, RefreshControl } from 'react-native';
+import { Text, StyleSheet, ScrollView, RefreshControl } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { fetchUserData } from '../../firebase/firestore';
 
 export type LoadingProps = {
     user: any,
