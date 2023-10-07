@@ -43,7 +43,10 @@ const ManageStudents = ({ route, navigation }: Props) => {
   const user: User = route.params.user;
   const [userData, setUserData] = useState<DocumentData>();
   const [refreshing, setRefreshing] = useState(false);
-
+  const typeMap = new Map();
+  typeMap.set("1", "😀");
+  typeMap.set("2", "😐");
+  typeMap.set("3", "😢");
   const handleAddYouth = () => {
     if (email !== undefined) {
       const q = query(
@@ -58,9 +61,9 @@ const ManageStudents = ({ route, navigation }: Props) => {
               updateDoc(doc(db, "users", document.id), {
                 club: user.uid,
               });
-              setError("User added.");
+              setTemporaryError("User added.");
             } else {
-              setError("This user cannot be added.");
+              setTemporaryError("This user cannot be added.");
             }
           });
         })
@@ -69,6 +72,14 @@ const ManageStudents = ({ route, navigation }: Props) => {
         });
     }
   };
+
+  const setTemporaryError = (message: string) => {
+    setError(message);
+    setTimeout(() => {
+      setError("");
+    }, 3000);
+  };
+
   const fetchStudents = () => {
     const q = query(
       collection(db, "users"),
@@ -101,6 +112,17 @@ const ManageStudents = ({ route, navigation }: Props) => {
     }, 2000);
   }, []);
 
+  function getProgressColor(progress: number): string | undefined {
+    console.log(progress);
+    if (progress < 0.3) {
+      return "rgba(255, 0, 0, 0.5)"; //red opaque
+    } else if (progress < 0.7 && progress >= 0.3) {
+      return "rgba(255, 165, 0, 0.5)"; //orange opaque
+    } else if (progress >= 0.7) {
+      return "rgba(0, 128, 0, 0.5)"; //green opaque
+    }
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Manage Students</Text>
@@ -123,14 +145,26 @@ const ManageStudents = ({ route, navigation }: Props) => {
       <FlatList
         data={students}
         refreshing={refreshing}
-        onRefresh={onRefresh} 
+        onRefresh={onRefresh}
         renderItem={({ item }) => (
           <View style={styles.studentItem}>
-            <Text style={styles.studentName}>{item.name}</Text>
-            <Progress.Bar progress={0.5} width={200} color={colors.pink} />
+            <Text style={styles.studentName}>
+              {typeMap.get(item.mood)} {item.name}{" "}
+            </Text>
+
+            <View style={styles.progressContainer}>
+              <Progress.Bar
+                progress={item.progress}
+                width={200}
+                color={getProgressColor(item.progress)}
+              />
+              <Text style={styles.progressText}>
+                {Math.round(item.progress * 100)}% 
+              </Text>
+            </View>
           </View>
         )}
-        keyExtractor={(item) => item.key} // Use unique keys
+        keyExtractor={(item) => item.key}
       />
     </SafeAreaView>
   );
@@ -224,13 +258,13 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   studentItem: {
-    width: 300,
+    width: "100%",
     padding: 10,
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: "column", // Vertical layout
+    alignItems: "flex-start", // Align items to the left
     backgroundColor: "white",
     borderRadius: 10,
-    margin: 10,
+    marginBottom: 10,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.2,
@@ -238,10 +272,20 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   studentName: {
-    flexShrink: 1, // Allow the name to shrink if necessary
-    fontSize: 16,
+    fontSize: 22,
     fontWeight: "bold",
-    marginRight: 20,
+    marginBottom: 5,
+  },
+  progressBar: {
+    marginTop: 5,
+  },
+  progressContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  progressText: {
+    marginLeft: 10, // Spacing between the progress bar and percentage
+    fontSize: 14,
   },
 });
 

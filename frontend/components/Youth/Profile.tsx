@@ -1,6 +1,7 @@
-import { View, Text, TouchableOpacity, StyleSheet, TextInput, Image } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, TextInput } from "react-native";
 import { signOutUser } from "../../firebase/auth";
 import { useState } from "react";
+import {Image} from 'expo-image'
 
 import { tabParamsList } from "../../App";
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
@@ -17,10 +18,10 @@ export default function Profile({ route, navigation }: Props) {
 
   return (
     <View style={styles.container}>
+    <Image source={require('../../constants/images/youth.png')} style={styles.logo}/>
+      
       {/* Display User's Display Name */}
       <Text style={styles.displayName}>{user.displayName}</Text>
-      <Text style={styles.club}>Club: CodeForGood_23</Text>
-      <Text style={styles.club}>Team: *****2*****</Text>
 
       {/* Display User's Email Address */}
       <Text style={styles.email}>{user.email}</Text>
@@ -41,6 +42,11 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,  // Light pink background
     padding: 80
   },
+  logo:{
+    marginLeft: 15,
+    width: 200,
+    height: 200,
+  },
   displayName: {
     fontSize: 28,
     fontWeight: 'bold',
@@ -48,14 +54,14 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     textAlign: 'center',
     padding: 10,
-    color: '#FF66B2'  // Vibrant pink
+    color: colors.pink
   },
   email: {
     fontSize: 16,
     fontWeight: '500', fontStyle:'italic',
     marginTop: 5,
     marginBottom: 10,
-    color: '#FF88C2',  // Medium pink
+    color: colors.pink,
     textAlign: 'center'
   },
   club: {
@@ -63,11 +69,11 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginTop: 5,
     marginBottom: 10,
-    color: '#FF88C2',  // Medium pink
+    color: colors.pink,
     textAlign: 'center'
   },
   signoutButton: {
-    backgroundColor: '#FF66B2',  // Vibrant pink for the button
+    backgroundColor: colors.pink,
     padding: 10,
     borderRadius: 5,
     marginTop: 10
