@@ -11,16 +11,16 @@ import ManageStudents from './ManageStudents';
 export type tabParamsList = {
   Dashboard: {user: User}
   Forums: {user: User},
-  "Manage Club": {user: User},
+  ManageClub: {user: User},
 }
 
-export type GirlNavProps = {
+export type LeaderNavProps = {
   user: User
 }
 
 const Tab = createBottomTabNavigator<tabParamsList>();
 
-export const LeaderNav = (props: GirlNavProps) => (
+export const LeaderNav = (props: LeaderNavProps) => (
   <NavigationContainer>
     <Tab.Navigator>
       <Tab.Screen
@@ -36,7 +36,7 @@ export const LeaderNav = (props: GirlNavProps) => (
          }}
       />
       <Tab.Screen
-        name="Manage Club"
+        name="ManageClub"
         component={ManageStudents}
         options={{
           headerShown: false,
