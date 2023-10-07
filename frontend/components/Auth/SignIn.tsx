@@ -18,7 +18,7 @@ const SignIn = (props: SignInProps) => {
     <SafeAreaView style={styles.parentContainer}>
       {/* Add an Image component at the top */}
       <Image
-        source={require('../../constants/images/CFGLogoNoBkg.png')} // Adjust the path to your image
+        source={require('../../constants/images/CFGLongLogo.png')} // Adjust the path to your image
         style={styles.logo}
       />
 
