@@ -94,6 +94,7 @@ const ManageStudents = ({ route, navigation }: Props) => {
         }));
 
         setStudents(fetchedStudents);
+        fetchStudents();
       })
       .catch((err: FirebaseError) => {
         console.error("Error fetching students: ", err.message);
