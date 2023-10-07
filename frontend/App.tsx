@@ -55,7 +55,7 @@ export default function App() {
       return <YouthNav user={user} userData = {userData} fetchUserData = {fetchUserData} setUserData = {setUserData}/>
     } else if (userData.type === "Leader") {
       return <LeaderNav user={user} userData = {userData} fetchUserData = {fetchUserData} setUserData = {setUserData}/>
-    } else if(userData.type ==  "Admin") {
+    } else if(userData.type === "Admin") {
       return <AdminNav user={user}/>
     }
     else {
