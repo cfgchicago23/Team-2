@@ -80,8 +80,10 @@ const styles = StyleSheet.create({
   },
   TextInput: {
     width: 250,
+    height: 40,
     borderWidth: 1,
     borderColor: 'lightgray',
+    backgroundColor: 'white',
     padding: 5,
     margin: 5,
     borderRadius: 5,

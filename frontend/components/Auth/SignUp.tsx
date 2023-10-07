@@ -1,13 +1,18 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { signUpUser } from '../../firebase/auth';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import DropDownPicker from 'react-native-dropdown-picker';
+import colors from '../../constants/colors';
+
 
 type SignUpProps = {
   setHasAccount: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const SignUp = (props: SignUpProps) => {  
+
+const SignUp = (props: SignUpProps) => {
+
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -22,12 +27,13 @@ const SignUp = (props: SignUpProps) => {
     { label: "Admin", value: "Admin" },
   ]);
 
+
   const handleSignUp = () => {
     if (name === "") {
       setError("name cannot be empty");
     } else if (password !== confirmPassword) {
       setError("passwords do not match");
-    } else if(userValue === "") {
+    } else if (userValue === "") {
       //error check that user type is not empty
       setError("Please select user type")
     }
@@ -36,8 +42,10 @@ const SignUp = (props: SignUpProps) => {
     }
   }
 
+
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.parentContainer}>
+      <Text style={styles.signUpText}>Welcome!</Text>
       <TextInput
         style={styles.TextInput}
         value={name}
@@ -67,62 +75,91 @@ const SignUp = (props: SignUpProps) => {
         onChangeText={(text) => setConfirmPassword(text)}
       />
       {/* dropdown picker to select user type */}
-      <View style={styles.container}>
+      <View style={styles.dropdownContainer}>
         <DropDownPicker
-              open={userOpen}
-              value={userValue} //userValue
-              items={user}
-              style={styles.dropdown}
-              setOpen={setuserOpen}
-              setValue={setuserValue}
-              setItems={setUser}
-              placeholder="Select User Type"
-              activityIndicatorColor="#5188E3"
-            />
+          open={userOpen}
+          value={userValue} //userValue
+          items={user}
+          style={styles.dropdown}
+          setOpen={setuserOpen}
+          setValue={setuserValue}
+          setItems={setUser}
+          placeholder="Select User Type"
+          activityIndicatorColor="#5188E3"
+        />
       </View>
       <TouchableOpacity
         style={styles.Button}
         onPress={handleSignUp}>
-          <Text
-            style={styles.ButtonText}>
-            Sign Up
-          </Text>
+        <Text
+          style={styles.ButtonText}>
+          Sign Up
+        </Text>
       </TouchableOpacity>
       <View style={styles.container}>
-        <Text>Already have an account? </Text>
+        <Text> Have an account? </Text>
         <Text
-            style={styles.changeText} 
-            onPress={(event) => {props.setHasAccount(true);}}>
-            Sign In
+          style={styles.changeText}
+          onPress={(event) => { props.setHasAccount(true); }}>
+          Sign In
         </Text>
       </View>
       <Text style={styles.ErrorText}>{error}</Text>
-    </View>
+    </SafeAreaView>
   );
 };
 
+
 const styles = StyleSheet.create({
   container: {
+    flexDirection: 'row',
+    // justifyContent: 'center',
     margin: 5,
   },
+  dropdownContainer: {
+    // flexDirection: '',
+    justifyContent: 'center',
+    marginBottom: 30,
+    marginRight: 75,
+    marginLeft: 75,
+    // rightMargin: 7,
+    // endWidth: 1000,
+  },
+  parentContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+    backgroundColor: colors.background,
+  },
+  signUpText: {
+    marginTop: 100,
+    fontSize: 27,
+    fontWeight: 'bold',
+    color: 'black',
+    marginBottom: 10,
+  },
   changeText: {
-    color: 'blue',
+    color: colors.pink,
+    // marginLeft: 70,
   },
   TextInput: {
     width: 250,
+    height: 40,
     borderWidth: 1,
     borderColor: 'lightgray',
-    padding: 5,
+    backgroundColor: 'white',
+    padding: 10,
     margin: 5,
     borderRadius: 5,
   },
   Button: {
     width: 250,
     margin: 5,
-    marginTop: 150,
+    marginTop: 10,
     padding: 10,
     alignItems: 'center',
-    backgroundColor: 'blue',
+    backgroundColor: colors.magenta,
     borderRadius: 10,
   },
   ButtonText: {
@@ -136,10 +173,13 @@ const styles = StyleSheet.create({
     width: 250,
     height: 40,
     margin: 5,
+    marginBottom: 100,
     borderRadius: 5,
     borderWidth: 1,
     borderColor: 'lightgray',
+    z: 0,
   },
 });
+
 
 export default SignUp;

@@ -2,6 +2,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { User } from "firebase/auth";
+import Profile from '../Girl/Profile';
 import React from 'react';
 
 import Dashboard from './Dashboard';
