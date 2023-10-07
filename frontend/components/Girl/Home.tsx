@@ -1,7 +1,7 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { View, Text, StyleSheet } from "react-native";
 
-import { tabParamsList } from "../App";
+import { tabParamsList } from "./GirlNav";
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 
 type Props = BottomTabScreenProps<tabParamsList, 'Home'>;

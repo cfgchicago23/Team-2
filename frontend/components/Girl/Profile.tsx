@@ -1,9 +1,9 @@
 import { StatusBar } from "expo-status-bar";
 import { View, Text, TouchableOpacity, StyleSheet, TextInput, Image } from "react-native";
-import { signOutUser } from "../firebase/auth";
+import { signOutUser } from "../../firebase/auth";
 import { useState } from "react";
 
-import { tabParamsList } from "../App";
+import { tabParamsList } from "./GirlNav";
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 
 type Props = BottomTabScreenProps<tabParamsList, 'Profile'>;
