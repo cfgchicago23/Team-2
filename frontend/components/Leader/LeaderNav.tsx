@@ -46,6 +46,7 @@ export const LeaderNav = (props: LeaderNavProps) => {
               ),
               tabBarHideOnKeyboard: true,
              }}
+            initialParams={{user: props.user}}
           />
           <Tab.Screen
             name="ManageClub"
