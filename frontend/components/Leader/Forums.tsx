@@ -6,7 +6,7 @@ import colors from '../../constants/colors';
 const Lessons = () => {  
     return (
         <SafeAreaView style={styles.container}>
-            <Text>Lessons</Text>
+            <Text>Forums</Text>
         </SafeAreaView>
     )
   
