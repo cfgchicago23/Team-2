@@ -5,6 +5,7 @@ import { StyleSheet } from 'react-native';
 import colors from '../../constants/colors';
 import { getMessages, uploadEvaluation, uploadMessage } from './firestoreforums';
 import { getAuth } from 'firebase/auth';
+
 const Forums = () => {  
     const [evaluation, setEvaluation] = useState("");
     const [messages, setMessages] = useState([]);
@@ -36,7 +37,7 @@ const Forums = () => {
         <SafeAreaView style={styles.container}>
           <ScrollView>
             <View style = {styles.middleContainer}>
-              <Text style={styles.title}>Enter a evaluation!</Text>
+              <Text style={styles.title}>Enter an evaluation!</Text>
                 <TextInput
               style={styles.messageInput}
               value={evaluation}
@@ -81,7 +82,7 @@ const Forums = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: colors.background,
     padding: 20,
   },
   middleContainer: {
