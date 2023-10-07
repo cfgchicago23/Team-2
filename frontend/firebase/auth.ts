@@ -20,7 +20,7 @@ export const signUpUser = (name: string, email: string, password: string, type:s
                 type: type,
                 club: null,
                 mood: 3,
-                progress: []
+                progress: Math.random()
               }).catch((error: FirebaseError) => authError(error, setError));
         })
         .catch((error: FirebaseError) => authError(error, setError));

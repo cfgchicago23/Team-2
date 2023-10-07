@@ -72,14 +72,13 @@ const ManageStudents = ({ route, navigation }: Props) => {
         });
     }
   };
-  
+
   const setTemporaryError = (message: string) => {
     setError(message);
     setTimeout(() => {
       setError("");
-    }, 3000); 
+    }, 3000);
   };
-  
 
   const fetchStudents = () => {
     const q = query(
@@ -113,13 +112,14 @@ const ManageStudents = ({ route, navigation }: Props) => {
     }, 2000);
   }, []);
 
-  function getMoodColor(mood: any): string | undefined {
-    if (mood === "3") {
-      return 'rgba(255, 0, 0, 0.5)'; //red opaque
-    } else if( mood === "2") {
-      return 'rgba(255, 165, 0, 0.5)'; //orange opaque
-    } else {
-      return 'rgba(0, 128, 0, 0.5)'; //green opaque
+  function getProgressColor(progress: number): string | undefined {
+    console.log(progress);
+    if (progress < 0.3) {
+      return "rgba(255, 0, 0, 0.5)"; //red opaque
+    } else if (progress < 0.7 && progress >= 0.3) {
+      return "rgba(255, 165, 0, 0.5)"; //orange opaque
+    } else if (progress >= 0.7) {
+      return "rgba(0, 128, 0, 0.5)"; //green opaque
     }
   }
 
@@ -148,14 +148,20 @@ const ManageStudents = ({ route, navigation }: Props) => {
         onRefresh={onRefresh}
         renderItem={({ item }) => (
           <View style={styles.studentItem}>
-            <Text style={styles.studentName}>{typeMap.get(item.mood)} {item.name} </Text>
-            
-            <Progress.Bar
-              progress={0.5}
-              width={300}
-              color={getMoodColor(item.mood)}
-              style={styles.progressBar}
-            />
+            <Text style={styles.studentName}>
+              {typeMap.get(item.mood)} {item.name}{" "}
+            </Text>
+
+            <View style={styles.progressContainer}>
+              <Progress.Bar
+                progress={item.progress}
+                width={200}
+                color={getProgressColor(item.progress)}
+              />
+              <Text style={styles.progressText}>
+                {Math.round(item.progress * 100)}% 
+              </Text>
+            </View>
           </View>
         )}
         keyExtractor={(item) => item.key}
@@ -266,12 +272,20 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   studentName: {
-    fontSize: 20,
+    fontSize: 22,
     fontWeight: "bold",
-    marginBottom: 5, 
+    marginBottom: 5,
   },
   progressBar: {
-    marginTop: 5, 
+    marginTop: 5,
+  },
+  progressContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  progressText: {
+    marginLeft: 10, // Spacing between the progress bar and percentage
+    fontSize: 14,
   },
 });
 
