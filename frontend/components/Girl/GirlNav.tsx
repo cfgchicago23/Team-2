@@ -43,7 +43,7 @@ export const GirlNav = (props: GirlNavProps) => (
           headerShown: false,
           tabBarShowLabel: false,
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="account" color={color} size={size} />
+            <MaterialCommunityIcons name="book" color={color} size={size} />
           ),
           tabBarHideOnKeyboard: true,
         }}
@@ -56,7 +56,7 @@ export const GirlNav = (props: GirlNavProps) => (
           headerShown: false,
           tabBarShowLabel: false,
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="account" color={color} size={size} />
+            <MaterialCommunityIcons name="phone" color={color} size={size} />
           ),
           tabBarHideOnKeyboard: true,
         }}
