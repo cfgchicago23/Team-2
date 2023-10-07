@@ -26,71 +26,60 @@ export type GirlNavProps = {
 
 const Tab = createBottomTabNavigator<tabParamsList>();
 
-export const GirlNav = (props: GirlNavProps) => {
-  const {user, userData, fetchUserData, setUserData} = props;
-
-  if (userData.club === null){
-    return(
-      <Loading user={user} userData={userData} fetchUserData={fetchUserData} setUserData={setUserData}></Loading>
-    )
-  }else{
-    return(
-      <NavigationContainer>
-        <Tab.Navigator>
-          <Tab.Screen
-            name="Dashboard"
-            component={Dashboard}
-            options={{
-              headerShown: false,
-              tabBarShowLabel: false,
-              tabBarIcon: ({ color, size }) => (
-                <MaterialCommunityIcons name="home" color={color} size={size} />
-              ),
-              tabBarHideOnKeyboard: true,
-             }}
-             initialParams={{user: props.user}}
-          />
-          <Tab.Screen
-            name="Lessons"
-            component={Lessons}
-            options={{
-              headerShown: false,
-              tabBarShowLabel: false,
-              tabBarIcon: ({ color, size }) => (
-                <MaterialCommunityIcons name="account" color={color} size={size} />
-              ),
-              tabBarHideOnKeyboard: true,
-            }}
-            initialParams={{user: props.user}}
-          />
-          <Tab.Screen
-            name="Help"
-            component={Help}
-            options={{
-              headerShown: false,
-              tabBarShowLabel: false,
-              tabBarIcon: ({ color, size }) => (
-                <MaterialCommunityIcons name="account" color={color} size={size} />
-              ),
-              tabBarHideOnKeyboard: true,
-            }}
-            initialParams={{user: props.user}}
-          />
-          <Tab.Screen
-            name="Profile"
-            component={Profile}
-            options={{
-              headerShown: false,
-              tabBarShowLabel: false,
-              tabBarIcon: ({ color, size }) => (
-                <MaterialCommunityIcons name="account" color={color} size={size} />
-              ),
-              tabBarHideOnKeyboard: true,
-            }}
-            initialParams={{user: props.user}}
-          />
-        </Tab.Navigator>
-      </NavigationContainer>
-    );
-  } 
-}
+export const GirlNav = (props: GirlNavProps) => (
+  <NavigationContainer>
+    <Tab.Navigator>
+      <Tab.Screen
+        name="Dashboard"
+        component={Dashboard}
+        options={{
+          headerShown: false,
+          tabBarShowLabel: false,
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="home" color={color} size={size} />
+          ),
+          tabBarHideOnKeyboard: true,
+         }}
+      />
+      <Tab.Screen
+        name="Lessons"
+        component={Lessons}
+        options={{
+          headerShown: false,
+          tabBarShowLabel: false,
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="book" color={color} size={size} />
+          ),
+          tabBarHideOnKeyboard: true,
+        }}
+        initialParams={{user: props.user}}
+      />
+      <Tab.Screen
+        name="Help"
+        component={Help}
+        options={{
+          headerShown: false,
+          tabBarShowLabel: false,
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="phone" color={color} size={size} />
+          ),
+          tabBarHideOnKeyboard: true,
+        }}
+        initialParams={{user: props.user}}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          headerShown: false,
+          tabBarShowLabel: false,
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="account" color={color} size={size} />
+          ),
+          tabBarHideOnKeyboard: true,
+        }}
+        initialParams={{user: props.user}}
+      />
+    </Tab.Navigator>
+  </NavigationContainer>
+);
