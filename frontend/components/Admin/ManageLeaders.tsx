@@ -38,10 +38,10 @@ const ManageLeaders = () => {
 
  return (
     <SafeAreaView style={styles.container}>
-        <Text>Manage Leaders</Text>
+        <Text style={styles.title}>Manage Leaders</Text>
         {createClub.uid === "" ? (
           <View style={styles.container}>
-            <Text>Add new leaders!</Text>
+            <Text style={styles.subtitle}>Add new leaders!</Text>
             <TextInput
             style={styles.TextInput}
             placeholder="email"
@@ -92,6 +92,20 @@ const styles = StyleSheet.create({
     margin: 5,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: colors.background,
+  },
+  title: {
+    fontSize: 30,
+    fontWeight: 'bold',
+    color: 'black',
+    marginTop: 40,
+    alignSelf: 'center',
+  },
+  subtitle: {
+    fontSize: 20,
+    color: 'black',
+    marginTop: 40,
+    alignSelf: 'center',
   },
   changeText: {
     color: 'blue',
@@ -109,7 +123,7 @@ const styles = StyleSheet.create({
     margin: 5,
     padding: 10,
     alignItems: 'center',
-    backgroundColor: 'blue',
+    backgroundColor: colors.light_pink,
     borderRadius: 10,
   },
   ButtonText: {
