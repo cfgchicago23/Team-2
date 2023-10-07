@@ -1,16 +1,36 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, TextInput, StyleSheet } from 'react-native';
+import { FirebaseError } from 'firebase/app';
+import { getFirestore, setDoc, doc, updateDoc } from 'firebase/firestore';
+import React from 'react';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { name } from '../../babel.config';
+import { User, getAuth } from "firebase/auth";
 
 
-const Help = () => {
-  const [message, setMessage] = useState('');
 
+const Help = ({}) => {
+  const typeMap = new Map<string, string>();
+typeMap.set('😀', '1');
+typeMap.set('😐', '2');
+typeMap.set('😢', '3');
+  const auth = getAuth()
+  const user = auth.currentUser!.uid
+  const handleEmojiPress = (emoji: string) => {
+    // Logic to handle emoji button press (if there's any)
+    //console.log(emoji + ' pressed', typeMap.get(emoji));
+
+    //console.log(user);
+    const db = getFirestore();
+    updateDoc(doc(db, "users", user), {
+      mood :typeMap.get(emoji)
+      })
+    }
+
+  
 
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Need Help?</Text>
-
 
       <TouchableOpacity style={styles.contactButton}>
         <Text style={styles.contactIcon}>📞</Text>
@@ -18,30 +38,23 @@ const Help = () => {
         <Text style={styles.subText}>+1 911 FOR URGENT SITUATIONS</Text>
       </TouchableOpacity>
 
-
       <View style={styles.mentorContainer}>
-        <Text style={styles.mentorTitle}>Contact Your Club Mentor</Text>
-        <Text>• Have any questions?</Text>
-        <Text>• Need help with a lesson?</Text>
-        <Text>• Anything you don’t understand?</Text>
-        <Text>• Is there something you’d like to share with your mentor?</Text>
-
-
+        <Text style={styles.mentorTitle}>Share Your Experience</Text>
+        <Text>How do you feel about today's session?</Text>
+<Text>Select an emoji to share your feedback with Club Mentor:</Text>
         <Text style={styles.messagePrompt}>Let them know below!</Text>
 
-
-        <TextInput
-          style={styles.messageInput}
-          value={message}
-          onChangeText={setMessage}
-          placeholder="Your message"
-          multiline={true}
-        />
-
-
-        <TouchableOpacity style={styles.sendButton}>
-          <Text style={styles.sendButtonText}>SEND</Text>
-        </TouchableOpacity>
+        <View style={styles.emojiContainer}>
+          <TouchableOpacity style={styles.emojiButton} onPress={() => handleEmojiPress("😀")}>
+            <Text style={styles.emoji}>😀</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.emojiButton} onPress={() => handleEmojiPress("😐")}>
+            <Text style={styles.emoji}>😐</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.emojiButton} onPress={() => handleEmojiPress("😢")}>
+            <Text style={styles.emoji}>😢</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -95,27 +108,22 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 10,
   },
-  messageInput: {
-    backgroundColor: 'white',
-    borderColor: 'gray',
-    borderWidth: 1,
-    borderRadius: 5,
-    padding: 10,
-    height: 100,
-    marginBottom: 20,
+  emojiContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 20,
   },
-  sendButton: {
-    backgroundColor: '#FFC1E1',
-    padding: 15,
-    borderRadius: 10,
+  emojiButton: {
+    flex: 1,
     alignItems: 'center',
+    padding: 10,
+    marginHorizontal: 5,
+    borderRadius: 5,
+    backgroundColor: '#FFC1E1',
   },
-  sendButtonText: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: 'white',
-  },
+  emoji: {
+    fontSize: 30,
+  }
 });
-
 
 export default Help;
