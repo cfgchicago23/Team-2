@@ -55,7 +55,7 @@ const Forums = () => {
                 {messages.map((message) => {
                   return (
                     <View style={styles.messageBubble} key={message.id}>
-                      <Text>{message.email}</Text>
+                      <Text>{message.user}</Text>
                       <Text>{message.message}</Text>
                     </View>
                   )
@@ -81,7 +81,7 @@ const Forums = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: colors.background,
     padding: 20,
   },
   middleContainer: {
@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
   },
 
   sendButton: {
-    backgroundColor: '#FFC1E1',
+    backgroundColor: colors.pink,
     padding: 15,
     borderRadius: 10,
     alignItems: 'center',
