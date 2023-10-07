@@ -41,7 +41,7 @@ const Forums = () => {
 
     const submitMessage = () => {
       //upload message to firestore
-      uploadMessage(currentMessage, auth.currentUser!.email!).then((list) => {
+      uploadMessage(currentMessage, auth.currentUser!.displayName!).then((list) => {
           setMessages(list)
       })
     }
@@ -72,7 +72,7 @@ const Forums = () => {
                 {messages.map((message) => {
                   return (
                     <View style={styles.messageBubble} key={message.id}>
-                      <Text>{message.user}</Text>
+                      <Text style={styles.bold}>{message.user}</Text>
                       <Text>{message.message}</Text>
                     </View>
                   )
@@ -190,6 +190,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'white',
   },
+  bold: {
+    fontWeight: 'bold'
+  }
 });
 
 export default Forums;
