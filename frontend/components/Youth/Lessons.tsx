@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, Modal, Button, ScrollView, StyleSheet, Image } from 'react-native';
+import { View, Text, TouchableOpacity, Modal, Button, ScrollView, StyleSheet} from 'react-native';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import lessonData from './data.json';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -60,10 +60,6 @@ const Lessons = () => {
         >
           {selectedLesson && (
             <View style={styles.modalContainer}>
-              <Image
-              source={require('../../constants/images/castle.jpg')} // Adjust the path to your image
-              style={styles.logo}
-              />
               <Text style={styles.modalTitle}>Lesson {selectedLesson.number}</Text>
               <Text style={styles.modalTopic}>{selectedLesson.topic}</Text>
               {selectedLesson.description.split(', ').map((line, index) => (
