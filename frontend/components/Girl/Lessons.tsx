@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, Modal, Button, ScrollView, StyleSheet } from 'react-native';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import lessonData from './data.json';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Lessons = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -36,35 +37,37 @@ const Lessons = () => {
   }));
 
   return (
-    <ScrollView style={styles.container}>
-      <Text style={styles.title}>Your Lessons</Text>
-      {modules.map((module, index) => (
-        <Module
-          key={index}
-          number={module.number}
-          topic={module.topic} // Pass the topic as a prop
-        />
-      ))}
+    <SafeAreaView>
+      <ScrollView ssafe={styles.container}>
+        <Text style={styles.title}>Your Lessons</Text>
+        {modules.map((module, index) => (
+          <Module
+            key={index}
+            number={module.number}
+            topic={module.topic} // Pass the topic as a prop
+          />
+        ))}
 
-      <Modal
-        animationType="slide"
-        transparent={false}
-        visible={modalVisible}
-        onRequestClose={() => {
-          setModalVisible(false);
-        }}
-      >
-        {selectedLesson && (
-          <View style={styles.modalContainer}>
-            <Text style={styles.modalTitle}>Lesson {selectedLesson.number}</Text>
-            <Text style={styles.modalTopic}>{selectedLesson.topic}</Text>
-            <Text style={styles.modalDescription}>{selectedLesson.description}</Text>
-            {/* Add any other information you want to display */}
-            <Button title="Close" onPress={() => setModalVisible(false)} />
-          </View>
-        )}
-      </Modal>
-    </ScrollView>
+        <Modal
+          animationType="slide"
+          transparent={false}
+          visible={modalVisible}
+          onRequestClose={() => {
+            setModalVisible(false);
+          }}
+        >
+          {selectedLesson && (
+            <View style={styles.modalContainer}>
+              <Text style={styles.modalTitle}>Lesson {selectedLesson.number}</Text>
+              <Text style={styles.modalTopic}>{selectedLesson.topic}</Text>
+              <Text style={styles.modalDescription}>{selectedLesson.description}</Text>
+              {/* Add any other information you want to display */}
+              <Button title="Close" onPress={() => setModalVisible(false)} />
+            </View>
+          )}
+        </Modal>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
