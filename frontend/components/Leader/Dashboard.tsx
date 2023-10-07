@@ -14,6 +14,7 @@ type Props = BottomTabScreenProps<tabParamsList, 'Dashboard'>;
 const LeaderDashboard = ({ route, navigation }: Props) => {
     const [events, setEvents] = useState<string[]>([]);
     const [eventName, setEventName] = useState<string>('');
+    const [refreshing, setRefreshing] = useState<boolean>(false);
     const user = route.params.user;
 
     useEffect(() => {
@@ -53,6 +54,14 @@ const LeaderDashboard = ({ route, navigation }: Props) => {
         }
     };
 
+    const onRefresh = React.useCallback(() => {
+        setRefreshing(true);
+        fetchEventsData();
+        setTimeout(() => {
+          setRefreshing(false);
+        }, 2000);
+      }, []);    
+
   return (
       <SafeAreaView style={styles.container}>
           <Text style={styles.title}>Announcements</Text>
@@ -73,6 +82,8 @@ const LeaderDashboard = ({ route, navigation }: Props) => {
 
           <FlatList
               data={events}
+              refreshing={refreshing}
+              onRefresh={onRefresh} 
               renderItem={({ item }) => <Text style={styles.item}>{item}</Text>}
               keyExtractor={(item, index) => index.toString()}
           />
