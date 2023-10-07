@@ -23,6 +23,8 @@ export const signUpUser = (name: string, email: string, password: string, type:s
         })
         .catch((error: FirebaseError) => authError(error, setError));
 };
+
+
   
 export const signInUser = (email: string, password: string, setError: React.Dispatch<React.SetStateAction<string>>) => {
     signInWithEmailAndPassword(auth, email, password).catch((error: FirebaseError) => authError(error, setError));
