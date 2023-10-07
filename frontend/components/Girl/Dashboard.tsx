@@ -68,7 +68,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.pink,
     margin: 10,
     justifyContent: 'center',
-    alignItems: 'left',
   },
   subText: {
     fontSize: 16,
