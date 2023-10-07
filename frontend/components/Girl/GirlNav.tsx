@@ -1,4 +1,4 @@
-import {NavigationContainer} from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { User } from "firebase/auth";
@@ -11,10 +11,10 @@ import Loading from './Loading';
 import { fetchUserData } from '../../firebase/firestore';
 
 export type tabParamsList = {
-  Dashboard: {user: User}
-  Help: {user: User},
-  Lessons: {user: User},
-  Profile: {user: User}
+  Dashboard: { user: User }
+  Help: { user: User },
+  Lessons: { user: User },
+  Profile: { user: User }
 }
 
 export type GirlNavProps = {
@@ -27,14 +27,14 @@ export type GirlNavProps = {
 const Tab = createBottomTabNavigator<tabParamsList>();
 
 export const GirlNav = (props: GirlNavProps) => {
-  const {user, userData, fetchUserData, setUserData} = props;
-
-  if (userData.club === null){
-    return(
+  const { user, userData, fetchUserData, setUserData } = props;
+  console.log(userData.club)
+  if (userData.club === null) {
+    return (
       <Loading user={user} userData={userData} fetchUserData={fetchUserData} setUserData={setUserData}></Loading>
     )
-  }else{
-    return(
+  } else {
+    return (
       <NavigationContainer>
         <Tab.Navigator>
           <Tab.Screen
@@ -47,8 +47,8 @@ export const GirlNav = (props: GirlNavProps) => {
                 <MaterialCommunityIcons name="home" color={color} size={size} />
               ),
               tabBarHideOnKeyboard: true,
-             }}
-             initialParams={{user: props.user}}
+            }}
+            initialParams={{ user: props.user }}
           />
           <Tab.Screen
             name="Lessons"
@@ -57,11 +57,11 @@ export const GirlNav = (props: GirlNavProps) => {
               headerShown: false,
               tabBarShowLabel: false,
               tabBarIcon: ({ color, size }) => (
-                <MaterialCommunityIcons name="account" color={color} size={size} />
+                <MaterialCommunityIcons name="book" color={color} size={size} />
               ),
               tabBarHideOnKeyboard: true,
             }}
-            initialParams={{user: props.user}}
+            initialParams={{ user: props.user }}
           />
           <Tab.Screen
             name="Help"
@@ -70,11 +70,11 @@ export const GirlNav = (props: GirlNavProps) => {
               headerShown: false,
               tabBarShowLabel: false,
               tabBarIcon: ({ color, size }) => (
-                <MaterialCommunityIcons name="account" color={color} size={size} />
+                <MaterialCommunityIcons name="phone" color={color} size={size} />
               ),
               tabBarHideOnKeyboard: true,
             }}
-            initialParams={{user: props.user}}
+            initialParams={{ user: props.user }}
           />
           <Tab.Screen
             name="Profile"
@@ -87,10 +87,10 @@ export const GirlNav = (props: GirlNavProps) => {
               ),
               tabBarHideOnKeyboard: true,
             }}
-            initialParams={{user: props.user}}
+            initialParams={{ user: props.user }}
           />
         </Tab.Navigator>
       </NavigationContainer>
-    );
-  } 
+    )
+  }
 }
