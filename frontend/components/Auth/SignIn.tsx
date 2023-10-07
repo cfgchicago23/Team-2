@@ -16,9 +16,9 @@ const SignIn = (props: SignInProps) => {
 
   return (
     <SafeAreaView style={styles.parentContainer}>
-      {/* Add an Image component */}
+      {/* Add an Image component at the top */}
       <Image
-        source={require('../../constants/images/CFG_logo.png')} // Adjust the path to your image
+        source={require('../../constants/images/CFGLogoNoBkg.png')} // Adjust the path to your image
         style={styles.logo}
       />
 
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
   logo: {
     width: 400,
     height: 150,
-    marginBottom: 40,
+    marginBottom: 20,
   },
 });
 
