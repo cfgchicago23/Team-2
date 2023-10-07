@@ -5,6 +5,7 @@ import { useState } from "react";
 
 import { tabParamsList } from "../App";
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
+import React from "react";
 
 type Props = BottomTabScreenProps<tabParamsList, 'Profile'>;
 
