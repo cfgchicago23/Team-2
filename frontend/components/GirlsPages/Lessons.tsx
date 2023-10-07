@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, Modal, Button, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, Modal, Button, ScrollView, StyleSheet } from 'react-native';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import lessonData from './data.json';
 
@@ -36,7 +36,7 @@ const Lessons = () => {
   }));
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <Text style={styles.title}>Your Lessons</Text>
       {modules.map((module, index) => (
         <Module
@@ -64,22 +64,21 @@ const Lessons = () => {
           </View>
         )}
       </Modal>
-    </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
     backgroundColor: '#F4ECFF',
   },
   title: {
     fontSize: 20,
     fontWeight: 'bold',
     color: 'black',
-    marginTop: -150,
+    marginTop: 40,
+    alignSelf: 'center',
   },
   moduleContainer: {
     alignItems: 'center',
