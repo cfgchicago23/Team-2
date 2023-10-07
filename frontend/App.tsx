@@ -7,6 +7,7 @@ import { useState } from 'react';
 
 import * as React from 'react';
 import { GirlNav } from './components/Girl/GirlNav';
+import {LeaderNav} from './components/Leader/LeaderNav';
 import { DocumentData } from 'firebase/firestore';
 import { fetchUserData } from './firebase/firestore'
 import {NavigationContainer} from '@react-navigation/native';
@@ -55,7 +56,10 @@ export default function App() {
       );
     } else if (userData.type === "Girl") {
       return <GirlNav user={user}/>
-    } else {
+    } else if (userData.type === "Leader") {
+      return <LeaderNav user={user}/>
+    }
+    else {
       return (
         <View style={styles.container}>
           <Text>Navigation not setup yet for {userData.type}</Text>

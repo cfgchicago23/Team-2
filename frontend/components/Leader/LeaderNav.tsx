@@ -3,14 +3,15 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { User } from "firebase/auth";
 import React from 'react';
+
 import Dashboard from './Dashboard';
-import Lessons from './Lessons';
-import Help from './Help';
+import Forums from './Forums';
+import ManageStudents from './ManageStudents';
 
 export type tabParamsList = {
   Dashboard: {user: User}
-  Help: {user: User},
-  Lessons: {user: User},
+  Forums: {user: User},
+  "Manage Club": {user: User},
 }
 
 export type GirlNavProps = {
@@ -19,7 +20,7 @@ export type GirlNavProps = {
 
 const Tab = createBottomTabNavigator<tabParamsList>();
 
-export const GirlNav = (props: GirlNavProps) => (
+export const LeaderNav = (props: GirlNavProps) => (
   <NavigationContainer>
     <Tab.Navigator>
       <Tab.Screen
@@ -35,8 +36,8 @@ export const GirlNav = (props: GirlNavProps) => (
          }}
       />
       <Tab.Screen
-        name="Lessons"
-        component={Lessons}
+        name="Manage Club"
+        component={ManageStudents}
         options={{
           headerShown: false,
           tabBarShowLabel: false,
@@ -48,8 +49,8 @@ export const GirlNav = (props: GirlNavProps) => (
         initialParams={{user: props.user}}
       />
       <Tab.Screen
-        name="Help"
-        component={Help}
+        name="Forums"
+        component={Forums}
         options={{
           headerShown: false,
           tabBarShowLabel: false,
