@@ -16,6 +16,7 @@ const SignIn = (props: SignInProps) => {
 
   return (
     <SafeAreaView style={styles.parentContainer}>
+      <Text style={styles.signInText}>Welcome!</Text>
       <TextInput
         style={styles.TextInput}
         placeholder="Email"
@@ -61,6 +62,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width : '100%',
     backgroundColor: colors.background,
+  },
+  signInText: {
+    fontSize: 27,
+    fontWeight: 'bold',
+    color: 'black',
+    marginBottom: 10,
   },
   changeText: {
     color: colors.pink,
