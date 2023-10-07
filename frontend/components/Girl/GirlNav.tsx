@@ -6,7 +6,7 @@ import React from 'react';
 import Dashboard from './Dashboard';
 import Lessons from './Lessons';
 import Help from './Help';
-import Profile from './Profile';
+import Profile from '../Auth/Profile';
 
 export type tabParamsList = {
   Dashboard: {user: User}

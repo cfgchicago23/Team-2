@@ -7,6 +7,7 @@ import React from 'react';
 import Dashboard from './Dashboard';
 import Forums from './Forums';
 import ManageStudents from './ManageStudents';
+import Profile from '../Auth/Profile';
 
 export type tabParamsList = {
   Dashboard: {user: User}
@@ -51,6 +52,19 @@ export const LeaderNav = (props: GirlNavProps) => (
       <Tab.Screen
         name="Forums"
         component={Forums}
+        options={{
+          headerShown: false,
+          tabBarShowLabel: false,
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="account" color={color} size={size} />
+          ),
+          tabBarHideOnKeyboard: true,
+        }}
+        initialParams={{user: props.user}}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={Profile}
         options={{
           headerShown: false,
           tabBarShowLabel: false,
