@@ -22,7 +22,7 @@ const SignUp = (props: SignUpProps) => {
   const [userOpen, setuserOpen] = useState(false);
   const [userValue, setuserValue] = useState("");
   const [user, setUser] = useState([
-    { label: "Girl", value: "Girl" },
+    { label: "Youth", value: "Youth" },
     { label: "Leader", value: "Leader" },
     { label: "Admin", value: "Admin" },
   ]);

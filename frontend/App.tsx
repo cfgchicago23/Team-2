@@ -6,7 +6,7 @@ import { Auth } from './components/Auth/Auth';
 import { useState } from 'react';
 
 import * as React from 'react';
-import { GirlNav } from './components/Girl/GirlNav';
+import { YouthNav } from './components/Youth/YouthNav';
 import {LeaderNav} from './components/Leader/LeaderNav';
 import { DocumentData } from 'firebase/firestore';
 import { fetchUserData } from './firebase/firestore'
@@ -55,8 +55,8 @@ export default function App() {
           <StatusBar style="auto" />
         </View>
       );
-    } else if (userData.type === "Girl") {
-      return <GirlNav user={user} userData = {userData} fetchUserData = {fetchUserData} setUserData = {setUserData}/>
+    } else if (userData.type === "Youth") {
+      return <YouthNav user={user} userData = {userData} fetchUserData = {fetchUserData} setUserData = {setUserData}/>
     } else if (userData.type === "Leader") {
       return <LeaderNav user={user} userData = {userData} fetchUserData = {fetchUserData} setUserData = {setUserData}/>
     } else if(userData.type ==  "Admin") {
