@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {View, Text, ScrollView, TextInput, TouchableOpacity} from 'react-native'
+import React, {useCallback, useEffect, useState} from 'react';
+import {View, Text, ScrollView, TextInput, TouchableOpacity, RefreshControl} from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StyleSheet } from 'react-native';
 import colors from '../../constants/colors';
@@ -11,7 +11,20 @@ const Forums = () => {
     const [messages, setMessages] = useState([]);
     const [currentMessage, setCurrentMessage] = useState("");
 
+    const[ refreshing, setRefreshing] = useState<boolean>(false);
+    
+
     const auth = getAuth()
+
+    const onRefresh = useCallback(() => {
+      setRefreshing(true);
+        getMessages().then((messages) => {
+          setMessages(messages)
+        })
+        setTimeout(() => {
+          setRefreshing(false);
+        }, 2000);
+      }, []);  
 
     useEffect(() => {
       //onload grab messages from load
@@ -21,7 +34,7 @@ const Forums = () => {
     }, [])
 
     const submitEvaluation = () => {
-      uploadEvaluation(evaluation, auth.currentUser!.email!).then(() => {
+      uploadEvaluation(evaluation, auth.currentUser!.displayName!).then(() => {
         setEvaluation("")
       })
     }
@@ -35,7 +48,10 @@ const Forums = () => {
 
     return (
         <SafeAreaView style={styles.container}>
-          <ScrollView>
+          <ScrollView 
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh}></RefreshControl>
+          }>
             <View style = {styles.middleContainer}>
               <Text style={styles.title}>Enter an evaluation!</Text>
                 <TextInput

@@ -24,7 +24,6 @@ const SignUp = (props: SignUpProps) => {
   const [user, setUser] = useState([
     { label: "Youth", value: "Youth" },
     { label: "Leader", value: "Leader" },
-    { label: "Admin", value: "Admin" },
   ]);
 
 

@@ -1,7 +1,7 @@
 import { FirebaseError } from 'firebase/app';
 import { getFirestore, setDoc, doc, updateDoc } from 'firebase/firestore';
-import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import React, { useCallback } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { name } from '../../babel.config';
 import { User, getAuth } from "firebase/auth";
@@ -18,11 +18,6 @@ typeMap.set('😀', '1');
 typeMap.set('😐', '2');
 typeMap.set('😢', '3');
 
-  const reversedMap = new Map<string, string>();
-  reversedMap.set('1', '😀');
-  reversedMap.set('2', '😐');
-  reversedMap.set('3', '😢');
-
   const auth = getAuth()
   const user = auth.currentUser!.uid
   const handleEmojiPress = (emoji: string) => {
@@ -35,10 +30,9 @@ typeMap.set('😢', '3');
       })
     }
 
-  
-
   return (
     <SafeAreaView style={styles.container}>
+      <ScrollView >
       <Text style={styles.title}>Need Help?</Text>
 
       <TouchableOpacity style={styles.contactButton}>
@@ -67,6 +61,7 @@ typeMap.set('😢', '3');
         <Text>Here's how your currently feeling!</Text>
         <Text style={styles.bigEmoji}>{currentEmoji}</Text>
       </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };

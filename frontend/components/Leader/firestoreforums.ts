@@ -6,14 +6,15 @@ export async function uploadEvaluation(evaluation: string, email: string){
     const docRef = doc(db, "evals", "list");
 
     const snapshot = await getDoc(docRef);
-
     const datalist = snapshot.data()
 
     const newList = datalist!.values
+    console.log(newList)
     
     newList.push({
         message: evaluation,
-        user: email
+        user: email,
+        id: String(new Date())
     })
 
     await setDoc(doc(db, "evals", "list"), {
