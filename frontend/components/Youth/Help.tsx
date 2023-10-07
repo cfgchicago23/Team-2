@@ -6,21 +6,29 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { name } from '../../babel.config';
 import { User, getAuth } from "firebase/auth";
 import colors from '../../constants/colors';
+import {Image} from 'expo-image'
 
 
 
 const Help = ({}) => {
+  const [currentEmoji, setCurrentEmoji] = React.useState('😀'); // Default emoji
+
   const typeMap = new Map<string, string>();
 typeMap.set('😀', '1');
 typeMap.set('😐', '2');
 typeMap.set('😢', '3');
+
+  const reversedMap = new Map<string, string>();
+  reversedMap.set('1', '😀');
+  reversedMap.set('2', '😐');
+  reversedMap.set('3', '😢');
+
   const auth = getAuth()
   const user = auth.currentUser!.uid
   const handleEmojiPress = (emoji: string) => {
     // Logic to handle emoji button press (if there's any)
-    //console.log(emoji + ' pressed', typeMap.get(emoji));
+    setCurrentEmoji(emoji);
 
-    //console.log(user);
     const db = getFirestore();
     updateDoc(doc(db, "users", user), {
       mood :typeMap.get(emoji)
@@ -42,7 +50,7 @@ typeMap.set('😢', '3');
       <View style={styles.mentorContainer}>
         <Text style={styles.mentorTitle}>Share Your Experience</Text>
         <Text>How do you feel about today's session?</Text>
-<Text>Select an emoji to share your feedback with Club Mentor:</Text>
+        <Text>Select an emoji to share your feedback with Club Mentor:</Text>
         <Text style={styles.messagePrompt}>Let them know below!</Text>
 
         <View style={styles.emojiContainer}>
@@ -56,6 +64,8 @@ typeMap.set('😢', '3');
             <Text style={styles.emoji}>😢</Text>
           </TouchableOpacity>
         </View>
+        <Text>Here's how your currently feeling!</Text>
+        <Text style={styles.bigEmoji}>{currentEmoji}</Text>
       </View>
     </SafeAreaView>
   );
@@ -67,6 +77,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.background,
     padding: 20,
+  },
+  bigEmoji: {
+    fontSize: 50
   },
   title: {
     fontSize: 32,
@@ -97,6 +110,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFEBF7',
     padding: 20,
     borderRadius: 10,
+    justifyContent: 'center',
+    gap: 20,
+    alignItems: 'center',
   },
   mentorTitle: {
     fontSize: 18,

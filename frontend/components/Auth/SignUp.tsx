@@ -4,7 +4,7 @@ import { signUpUser } from '../../firebase/auth';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import DropDownPicker from 'react-native-dropdown-picker';
 import colors from '../../constants/colors';
-
+import {Image} from 'expo-image'
 
 type SignUpProps = {
   setHasAccount: React.Dispatch<React.SetStateAction<boolean>>;
@@ -45,6 +45,10 @@ const SignUp = (props: SignUpProps) => {
 
   return (
     <SafeAreaView style={styles.parentContainer}>
+      <Image
+        source={require('../../constants/images/CFGLongLogo.png')} // Adjust the path to your image
+        style={styles.logo}
+      />
       <Text style={styles.signUpText}>Welcome!</Text>
       <TextInput
         style={styles.TextInput}
@@ -116,6 +120,11 @@ const styles = StyleSheet.create({
     // justifyContent: 'center',
     margin: 5,
   },
+  logo: {
+    width: 400,
+    height: 150,
+    marginLeft: 30,
+  },
   dropdownContainer: {
     // flexDirection: '',
     justifyContent: 'center',
@@ -133,7 +142,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,
   },
   signUpText: {
-    marginTop: 100,
+    marginTop: 20,
     fontSize: 27,
     fontWeight: 'bold',
     color: 'black',
