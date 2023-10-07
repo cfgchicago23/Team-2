@@ -18,7 +18,7 @@ const LeaderDashboard = ({ route, navigation }: Props) => {
 
     useEffect(() => {
         fetchEventsData();
-    });
+    }, []);
 
     const fetchEventsData = () => {
         const clubRef = doc(db, 'clubs', user.uid);

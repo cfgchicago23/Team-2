@@ -17,7 +17,7 @@ const Dashboard = ({ route, navigation }: Props) => {
 
     useEffect(() => {
         fetchEventsData();
-    });
+    }, []);
 
     const fetchEventsData = () => {
         const userRef = doc(db, 'users', user.uid);
