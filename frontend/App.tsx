@@ -12,6 +12,7 @@ import { DocumentData } from 'firebase/firestore';
 import { fetchUserData } from './firebase/firestore'
 import {NavigationContainer} from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { AdminNav } from './components/Admin/AdminNav';
 
 export type tabParamsList = {
   Home: undefined;
@@ -58,6 +59,8 @@ export default function App() {
       return <GirlNav user={user}/>
     } else if (userData.type === "Leader") {
       return <LeaderNav user={user}/>
+    } else if(userData.type ==  "Admin") {
+      return <AdminNav user={user}/>
     }
     else {
       return (
