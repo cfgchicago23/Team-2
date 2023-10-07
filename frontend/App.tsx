@@ -56,9 +56,9 @@ export default function App() {
         </View>
       );
     } else if (userData.type === "Girl") {
-      return <GirlNav user={user}/>
+      return <GirlNav user={user} userData = {userData} fetchUserData = {fetchUserData} setUserData = {setUserData}/>
     } else if (userData.type === "Leader") {
-      return <LeaderNav user={user}/>
+      return <LeaderNav user={user} userData = {userData} fetchUserData = {fetchUserData} setUserData = {setUserData}/>
     } else if(userData.type ==  "Admin") {
       return <AdminNav user={user}/>
     }
