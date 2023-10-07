@@ -4,7 +4,7 @@ import SignIn from './SignIn';
 
 export const Auth = () => {  
 
-  const [hasAccount, setHasAccount] = useState(false);
+  const [hasAccount, setHasAccount] = useState(true);
 
   if (!hasAccount) {
     return (<SignUp setHasAccount={setHasAccount}/>);
