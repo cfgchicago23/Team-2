@@ -7,6 +7,8 @@ import Dashboard from './Dashboard';
 import Lessons from './Lessons';
 import Help from './Help';
 import Profile from './Profile';
+import Loading from './Loading';
+import { fetchUserData } from '../../firebase/firestore';
 
 export type tabParamsList = {
   Dashboard: {user: User}
@@ -16,7 +18,10 @@ export type tabParamsList = {
 }
 
 export type GirlNavProps = {
-  user: User
+  user: User,
+  userData: any,
+  fetchUserData: any,
+  setUserData: any,
 }
 
 const Tab = createBottomTabNavigator<tabParamsList>();
