@@ -1,12 +1,12 @@
-import React, {useState} from 'react';
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, TextInput, TouchableOpacity, View, Image } from 'react-native';
 import { signInUser } from '../../firebase/auth';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import colors from '../../constants/colors';
 
 type SignInProps = {
   setHasAccount: React.Dispatch<React.SetStateAction<boolean>>;
-}
+};
 
 const SignIn = (props: SignInProps) => {  
 
@@ -16,6 +16,12 @@ const SignIn = (props: SignInProps) => {
 
   return (
     <SafeAreaView style={styles.parentContainer}>
+      {/* Add an Image component at the top */}
+      <Image
+        source={require('../../constants/images/CFGLogoNoBkg.png')} // Adjust the path to your image
+        style={styles.logo}
+      />
+
       <Text style={styles.signInText}>Welcome!</Text>
       <TextInput
         style={styles.TextInput}
@@ -60,7 +66,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    width : '100%',
+    width: '100%',
     backgroundColor: colors.background,
   },
   signInText: {
@@ -68,6 +74,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'black',
     marginBottom: 10,
+    marginTop: 60,
   },
   changeText: {
     color: colors.pink,
@@ -94,7 +101,15 @@ const styles = StyleSheet.create({
   ErrorText: {
     textAlign: 'center',
     color: 'red',
-  }
+  },
+  // Add your image style here
+  logo: {
+    width: 400,
+    height: 150,
+    //put logo at top of screen
+    position: 'absolute',
+    top: 160,
+  },
 });
 
 export default SignIn;
