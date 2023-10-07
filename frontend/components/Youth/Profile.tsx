@@ -5,6 +5,8 @@ import { useState } from "react";
 import { tabParamsList } from "../../App";
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 import React from "react";
+import colors from '../../constants/colors';
+
 
 type Props = BottomTabScreenProps<tabParamsList, 'Profile'>;
 
@@ -36,7 +38,7 @@ export default function Profile({ route, navigation }: Props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFEBF7',  // Light pink background
+    backgroundColor: colors.background,  // Light pink background
     padding: 80
   },
   displayName: {
