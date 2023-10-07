@@ -113,7 +113,6 @@ const ManageStudents = ({ route, navigation }: Props) => {
   }, []);
 
   function getProgressColor(progress: number): string | undefined {
-    console.log(progress);
     if (progress < 0.3) {
       return "rgba(255, 0, 0, 0.5)"; //red opaque
     } else if (progress < 0.7 && progress >= 0.3) {
@@ -125,7 +124,7 @@ const ManageStudents = ({ route, navigation }: Props) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>Manage Students</Text>
+      <Text style={styles.title}>Manage Club</Text>
 
       <View style={styles.inputContainer}>
         <TextInput
@@ -155,11 +154,11 @@ const ManageStudents = ({ route, navigation }: Props) => {
             <View style={styles.progressContainer}>
               <Progress.Bar
                 progress={item.progress}
-                width={200}
+                width={275}
                 color={getProgressColor(item.progress)}
               />
               <Text style={styles.progressText}>
-                {Math.round(item.progress * 100)}% 
+                {Math.round(item.progress * 100)}%
               </Text>
             </View>
           </View>
@@ -260,8 +259,8 @@ const styles = StyleSheet.create({
   studentItem: {
     width: "100%",
     padding: 10,
-    flexDirection: "column", // Vertical layout
-    alignItems: "flex-start", // Align items to the left
+    flexDirection: "column",
+    alignItems: "flex-start", 
     backgroundColor: "white",
     borderRadius: 10,
     marginBottom: 10,
@@ -272,19 +271,18 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   studentName: {
-    fontSize: 22,
-    fontWeight: "bold",
+    fontSize: 27,
     marginBottom: 5,
   },
   progressBar: {
     marginTop: 5,
   },
   progressContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
   progressText: {
-    marginLeft: 10, // Spacing between the progress bar and percentage
+    marginLeft: 10,
     fontSize: 14,
   },
 });

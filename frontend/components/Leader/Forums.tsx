@@ -53,12 +53,12 @@ const Forums = () => {
             <RefreshControl refreshing={refreshing} onRefresh={onRefresh}></RefreshControl>
           }>
             <View style = {styles.middleContainer}>
-              <Text style={styles.title}>Enter an evaluation!</Text>
+              <Text style={styles.title}>Report to Admin</Text>
                 <TextInput
               style={styles.messageInput}
               value={evaluation}
               onChangeText={setEvaluation}
-              placeholder="Your evaluation"
+              placeholder="Write your evaluation here"
               multiline={true}
               />
               <TouchableOpacity style={styles.sendButton} onPress={() => submitEvaluation()}>
@@ -67,7 +67,7 @@ const Forums = () => {
 
             </View>
             <View style={styles.messageInputContainer}>
-              <Text style={styles.title}>Join the Conversation!</Text>
+              <Text style={styles.title}>Join Conversation!</Text>
               <View>
                 {messages.map((message) => {
                   return (
@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
   },
   messageBubble: {
     padding: 10,
-    backgroundColor: '#FFEBF7',
+    backgroundColor: '#fcfff2',
     borderRadius: 10,
     marginBottom: 20,
     justifyContent: 'center',

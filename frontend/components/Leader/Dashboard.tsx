@@ -64,14 +64,14 @@ const LeaderDashboard = ({ route, navigation }: Props) => {
 
   return (
       <SafeAreaView style={styles.container}>
-          <Text style={styles.title}>Announcements</Text>
+          <Text style={styles.title}>Notifiy Your Club</Text>
 
 
           <View style={styles.inputContainer}>
               <TextInput
                   style={styles.input}
                   value={eventName}
-                  placeholder="Enter event name"
+                  placeholder="Enter Announcement"
                   onChangeText={setEventName}
               />
               <TouchableOpacity style={styles.addButton} onPress={addEvent}>
