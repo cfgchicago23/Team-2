@@ -35,6 +35,7 @@ export const GirlNav = (props: GirlNavProps) => (
           ),
           tabBarHideOnKeyboard: true,
          }}
+        initialParams={{user: props.user}}
       />
       <Tab.Screen
         name="Lessons"
