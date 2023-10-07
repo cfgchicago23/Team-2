@@ -1,24 +1,118 @@
 import React, {useState} from 'react';
-import {View, Text} from 'react-native'
+import {View, Text, ScrollView, TextInput, TouchableOpacity} from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StyleSheet } from 'react-native';
 import colors from '../../constants/colors';
-const Lessons = () => {  
+import { uploadEvaluation } from './firestoreforums';
+import { getAuth } from 'firebase/auth';
+const Forums = () => {  
+    const [evaluation, setEvaluation] = useState("");
+
+    const auth = getAuth()
+
+    const submitEvaluation = () => {
+      uploadEvaluation(evaluation, auth.currentUser?.email).then(() => {
+        setEvaluation("")
+      })
+    }
+
     return (
         <SafeAreaView style={styles.container}>
-            <Text>Forums</Text>
+          <ScrollView>
+            <ScrollView>
+
+            </ScrollView>
+            <View style = {styles.middleContainer}>
+              <Text style={styles.title}>Enter a evaluation!</Text>
+                <TextInput
+              style={styles.messageInput}
+              value={evaluation}
+              onChangeText={setEvaluation}
+              placeholder="Your message"
+              multiline={true}
+            />
+
+            <TouchableOpacity style={styles.sendButton} onPress={() => submitEvaluation()}>
+              <Text style={styles.sendButtonText}>SEND</Text>
+            </TouchableOpacity>
+            </View>
+          </ScrollView>
         </SafeAreaView>
     )
   
 };
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: colors.background,
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-  });
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    padding: 20,
+  },
+  middleContainer: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  title: {
+    fontSize: 32,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 40,
+  },
+  contactButton: {
+    backgroundColor: '#FFC1E1',
+    padding: 20,
+    borderRadius: 10,
+    alignItems: 'center',
+    marginBottom: 40,
+  },
+  contactIcon: {
+    fontSize: 24,
+  },
+  contactText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  subText: {
+    fontSize: 14,
+    marginTop: 10,
+    color: 'gray',
+  },
+  mentorContainer: {
+    backgroundColor: '#FFEBF7',
+    padding: 20,
+    borderRadius: 10,
+  },
+  mentorTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  messagePrompt: {
+    fontSize: 16,
+    fontWeight: '500',
+    marginTop: 20,
+    marginBottom: 10,
+  },
+  messageInput: {
+    backgroundColor: 'white',
+    borderColor: 'gray',
+    borderWidth: 1,
+    borderRadius: 5,
+    padding: 10,
+    height: 100,
+    marginBottom: 20,
+  },
+  sendButton: {
+    backgroundColor: '#FFC1E1',
+    padding: 15,
+    borderRadius: 10,
+    alignItems: 'center',
+  },
+  sendButtonText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: 'white',
+  },
+});
 
-export default Lessons;
+export default Forums;
