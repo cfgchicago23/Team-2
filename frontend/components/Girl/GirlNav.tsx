@@ -8,7 +8,6 @@ import Lessons from './Lessons';
 import Help from './Help';
 import Profile from './Profile';
 import Loading from './Loading';
-import { fetchUserData } from '../../firebase/firestore';
 
 export type tabParamsList = {
   Dashboard: { user: User }

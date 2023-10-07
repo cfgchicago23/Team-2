@@ -1,4 +1,3 @@
-import { FirebaseError } from "firebase/app";
 import { doc, collection, getFirestore, query, where, getDocs, setDoc, updateDoc, } from "firebase/firestore";
 
 //get firestore reference and find user by email

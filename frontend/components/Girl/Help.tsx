@@ -1,12 +1,8 @@
-import { FirebaseError } from 'firebase/app';
-import { getFirestore, setDoc, doc, updateDoc } from 'firebase/firestore';
+import { getFirestore, doc, updateDoc } from 'firebase/firestore';
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { name } from '../../babel.config';
-import { User, getAuth } from "firebase/auth";
-
-
+import {  getAuth } from "firebase/auth";
 
 const Help = ({}) => {
   const typeMap = new Map<string, string>();
@@ -26,8 +22,6 @@ typeMap.set('😢', '3');
       })
     }
 
-  
-
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Need Help?</Text>
@@ -41,7 +35,7 @@ typeMap.set('😢', '3');
       <View style={styles.mentorContainer}>
         <Text style={styles.mentorTitle}>Share Your Experience</Text>
         <Text>How do you feel about today's session?</Text>
-<Text>Select an emoji to share your feedback with Club Mentor:</Text>
+        <Text>Select an emoji to share your feedback with Club Mentor:</Text>
         <Text style={styles.messagePrompt}>Let them know below!</Text>
 
         <View style={styles.emojiContainer}>

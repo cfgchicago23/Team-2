@@ -9,15 +9,12 @@ import { GirlNav } from './components/Girl/GirlNav';
 import {LeaderNav} from './components/Leader/LeaderNav';
 import { DocumentData } from 'firebase/firestore';
 import { fetchUserData } from './firebase/firestore'
-import {NavigationContainer} from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { AdminNav } from './components/Admin/AdminNav';
 
 export type tabParamsList = {
   Home: undefined;
   Profile: {user: User};
 }
-const Tab = createBottomTabNavigator<tabParamsList>();
 
 export default function App() {
   const [user, setUser] = useState<User>();
