@@ -20,7 +20,9 @@ export type LeaderNavProps = {
 
 const Tab = createBottomTabNavigator<tabParamsList>();
 
-export const LeaderNav = (props: LeaderNavProps) => (
+export const LeaderNav = (props: LeaderNavProps) => { 
+
+  return (
   <NavigationContainer>
     <Tab.Navigator>
       <Tab.Screen
@@ -63,4 +65,4 @@ export const LeaderNav = (props: LeaderNavProps) => (
       />
     </Tab.Navigator>
   </NavigationContainer>
-);
+)};
