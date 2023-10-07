@@ -14,6 +14,7 @@ export type tabParamsList = {
   Dashboard: {user: User}
   Forums: {user: User},
   ManageClub: {user: User},
+  Profile: {user: User}
 }
 
 export type LeaderNavProps = {

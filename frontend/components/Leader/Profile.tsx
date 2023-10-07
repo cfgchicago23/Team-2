@@ -31,6 +31,13 @@ export default function Profile({ route, navigation }: Props) {
         <Text>{error}</Text>
       </View>
 
+      <View style={styles.bottom}>
+        <TouchableOpacity onPress={() => signOutUser(setError)} style={styles.signoutButton}>
+          <Text style={styles.signout}>Sign Out</Text>
+        </TouchableOpacity>
+        <Text>{error}</Text>
+      </View>
+
       <StatusBar style="auto" />
     </View>
   );
