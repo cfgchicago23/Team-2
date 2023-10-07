@@ -92,6 +92,7 @@ const styles = StyleSheet.create({
   moduleContainer: {
     alignItems: 'center',
     marginVertical: 10,
+    backgroundColor: colors.background,
   },
   rectangle: {
     width: 350,
@@ -115,8 +116,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: colors.background,
     padding: 20,
+    backgroundColor: colors.background,
   },
   modalTitle: {
     fontSize: 24,

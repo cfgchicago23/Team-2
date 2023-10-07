@@ -5,6 +5,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { name } from '../../babel.config';
 import { User, getAuth } from "firebase/auth";
+import colors from '../../constants/colors';
 
 
 
@@ -64,7 +65,7 @@ typeMap.set('😢', '3');
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: colors.background,
     padding: 20,
   },
   title: {
